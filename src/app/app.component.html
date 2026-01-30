@@ -45,21 +45,6 @@
     font-weight: 500;
     font-family: 'Cheescake Monoline', sans-serif;
   }
-  .btn-tienda {
-    background-color: gray;
-        color: black;
-    border: none;
-    padding: 8px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-
-  }
-  /* Estilos para el enlace que parece botón */
-  a.btn-tienda {
-    display: inline-block;
-    text-align: center;
-  }
 
   @media (max-width: 768px) {
     header, footer {
@@ -70,6 +55,7 @@
     /* Estilos del Slider para Móvil (Touch) */
     .slider-container {
       overflow-x: auto; /* Habilitar scroll horizontal */
+      height: calc((100vh - 110px) * 0.7); /* Reducir altura un 30% en móvil */
       scroll-snap-type: x mandatory; /* Efecto de imán al soltar */
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -138,10 +124,9 @@
     right: 20px;
     background-color: white;
     color: #25d366;
-    width: auto;
-    height: auto;
-    padding: 10px 20px;
-    border-radius: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,16 +134,13 @@
     z-index: 100;
     text-decoration: none;
     transition: transform 0.3s;
-    gap: 10px;
-    font-weight: bold;
-    font-family: 'Cheescake Monoline', sans-serif;
   }
   .whatsapp-float:hover {
     transform: scale(1.1);
   }
   .whatsapp-icon {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     fill: #25d366;
   }
 </style>
@@ -166,9 +148,9 @@
 <header>
   <img src="assets/logos/logo.png" alt="Fretzia Bakery Logo" class="header-logo">
   <nav>
-    <a routerLink="/nosotros">Nosotros</a>
-    <a routerLink="/cheescakes">Cheescakes</a>
-    <a href="https://wa.me/573137733408" target="_blank" class="btn-tienda">Pedidos</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#cheescakes">Cheescakes</a>
+    <a href="https://wa.me/573137733408" target="_blank">Pedidos</a>
   </nav>
 </header>
 
@@ -186,16 +168,25 @@
   </div>
 </div>
 
+<section id="cheescakes" style="padding: 60px 20px;">
+  <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 2.5rem;">Cheescakes</h2>
+  <p style="text-align: center;">Descubre nuestra variedad de sabores.</p>
+</section>
+
+<section id="nosotros" style="padding: 60px 20px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 2.5rem;">Nosotros</h2>
+  <p style="text-align: center;">Conoce más sobre nuestra panadería.</p>
+</section>
+
 <router-outlet></router-outlet>
 
 <footer>
   <img src="assets/logos/logo.png" alt="Fretzia Bakery Logo" class="footer-logo">
-  <div style="color: white; margin-top: 10px;">Todos los derechos reservados - Fretzia Bakery 2026</div>
+  <div style="color: white; margin-top: 10px; font-size: 0.8em;">Todos los derechos reservados - Fretzia Bakery 2026</div>
 </footer>
 
 <a href="https://wa.me/573137733408" class="whatsapp-float" target="_blank">
   <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.888.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.978zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
   </svg>
-  <span>Pedidos</span>
 </a>
