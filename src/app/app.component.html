@@ -1,4 +1,98 @@
-<div style="text-align: center;">
-  <img src="assets/Gemini_Generated_Image_f5rgh3f5rgh3f5rg.png" alt="Fretzia Bakery">
+<style>
+  header, footer {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-sizing: border-box;
+  }
+  .header-logo, .footer-logo {
+    height: 80px;
+    width: auto;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .btn-tienda {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    header, footer {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  /* Estilos del Slider */
+  .slider-container {
+    width: 100%;
+    height: calc(100vh - 110px); /* Altura ajustada para vista completa menos el header */
+    overflow: hidden;
+    position: relative;
+  }
+  .slider-track {
+    display: flex;
+    width: 600%; /* 6 imágenes = 600% de ancho */
+    height: 100%;
+    animation: slideshow 24s infinite; /* 4s por imagen * 6 imágenes = 24s total */
+  }
+  .slider-image {
+    width: 16.666%; /* 100% / 6 imágenes */
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Animación para 6 imágenes */
+  @keyframes slideshow {
+    0%, 12% { margin-left: 0; }
+    16.66%, 28.66% { margin-left: -100%; }
+    33.33%, 45.33% { margin-left: -200%; }
+    50%, 62% { margin-left: -300%; }
+    66.66%, 78.66% { margin-left: -400%; }
+    83.33%, 95.33% { margin-left: -500%; }
+    100% { margin-left: 0; }
+  }
+</style>
+
+<header>
+  <img src="assets/logo.png" alt="Fretzia Bakery Logo" class="header-logo">
+  <nav>
+    <a href="#">Nosotros</a>
+    <a href="#">Cheescakes</a>
+    <button class="btn-tienda">Tienda</button>
+  </nav>
+</header>
+
+<div class="slider-container">
+  <div class="slider-track">
+    <!-- Asegúrate de que los nombres de archivo coincidan con los de tu carpeta assets -->
+    <img src="assets/1.webp" class="slider-image" alt="Imagen 1">
+    <img src="assets/2.webp" class="slider-image" alt="Imagen 2">
+    <img src="assets/3.webp" class="slider-image" alt="Imagen 3">
+    <img src="assets/4.webp" class="slider-image" alt="Imagen 4">
+    <img src="assets/5.png" class="slider-image" alt="Imagen 5">
+    <img src="assets/6.jpg" class="slider-image" alt="Imagen 6">
+  </div>
 </div>
+
 <router-outlet></router-outlet>
+
+<footer>
+  <img src="assets/Gerber.png" alt="Fretzia Bakery Logo" class="footer-logo">
+</footer>
