@@ -18,12 +18,17 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/desk/6.jpg',
     'assets/desk/7.jpg',
     'assets/desk/8.jpg',
-    'assets/desk/9.jpg',
+    'assets/desk/9.png',
     'assets/desk/10.jpg',
     'assets/desk/11.jpg',
-    'assets/desk/12.jpg',
     'assets/desk/13.jpg',
-    'assets/desk/14.webp'
+  ];
+  images3: string[] = [
+    'assets/slide-head/1.png',
+    'assets/slide-head/2.png',
+    'assets/slide-head/3.png',
+    'assets/slide-head/4.png',
+    'assets/slide-head/5.png',
   ];
 
   // Datos de los cheesecakes para la galería
@@ -37,7 +42,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   cart: { [name: string]: number } = {};
+  showModal = false;
   currentIndex = 0;
+  currentIndex3 = 0;
   intervalId: any;
 
   ngOnInit() {
@@ -58,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    this.currentIndex3 = (this.currentIndex3 + 1) % this.images3.length;
   }
 
   prevSlide() {
@@ -66,6 +74,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number) {
     this.currentIndex = index;
+  }
+
+  goToSlide3(index: number) {
+    this.currentIndex3 = index;
   }
 
   // Reiniciar el timer cuando el usuario interactúa manualmente (opcional)
@@ -92,6 +104,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     this.cart[name]++;
     alert(`¡${name} agregado al pedido!`);
+  }
+
+  get cartItems() {
+    return Object.keys(this.cart).map(key => ({ name: key, quantity: this.cart[key] }));
+  }
+
+  openModal() {
+    if (this.cartItems.length > 0) {
+      this.showModal = true;
+    } else {
+      alert('Aún no has agregado productos al pedido.');
+    }
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 
   get whatsappLink(): string {

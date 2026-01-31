@@ -55,7 +55,7 @@
     /* Estilos del Slider para Móvil (Touch) */
     .slider-container {
       overflow-x: auto; /* Habilitar scroll horizontal */
-      height: calc((100vh - 110px) * 0.7); /* Reducir altura un 30% en móvil */
+      height: calc((100vh - 110px) * 0.5); /* Reducir altura un 50% en móvil */
       scroll-snap-type: x mandatory; /* Efecto de imán al soltar */
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -221,6 +221,94 @@
   .add-btn:hover {
     background-color: #333;
   }
+  .slider-small {
+    height: calc((100vh - 110px) * 0.6);
+  }
+  @media (max-width: 768px) {
+    .slider-small {
+      height: calc((100vh - 110px) * 0.3);
+    }
+  }
+
+  /* Estilos del carrusel de texto (ticker) */
+  .ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+    padding: 15px 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  .ticker-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-scroll 15s linear infinite;
+  }
+  .ticker-content span {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    padding: 0 2rem;
+  }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* Estilos del Modal de Pedido */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    font-family: sans-serif;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    font-size: 1.1rem;
+  }
+  .confirm-btn {
+    display: block;
+    background-color: #25d366;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+  }
+  .confirm-btn:hover {
+    background-color: #128c7e;
+  }
 </style>
 
 <header>
@@ -228,21 +316,22 @@
   <nav>
     <a href="#nosotros">Nosotros</a>
     <a href="#cheescakes">Cheescakes</a>
-    <a href="https://wa.me/573137733408" target="_blank">Pedidos</a>
+    <a [href]="whatsappLink" target="_blank">WhatsApp</a>
+    <a href="javascript:void(0)" (click)="openModal()">Pedido</a>
   </nav>
 </header>
 
 <div class="slider-container">
   <!-- El margen izquierdo se calcula dinámicamente: -100% * índice actual -->
-  <div class="slider-track" [style.marginLeft.%]="-(currentIndex * 100)">
-    <img *ngFor="let img of images" [src]="img" class="slider-image" alt="Slider Image">
+  <div class="slider-track" [style.marginLeft.%]="-(currentIndex3 * 100)">
+    <img *ngFor="let img of images3" [src]="img" class="slider-image" alt="Slider Image">
   </div>
   
   <div class="slider-dots">
-    <span *ngFor="let img of images; let i = index" 
+    <span *ngFor="let img of images3; let i = index" 
           class="dot" 
-          [class.active]="i === currentIndex"
-          (click)="goToSlide(i); resetTimer()"></span>
+          [class.active]="i === currentIndex3"
+          (click)="goToSlide3(i); resetTimer()"></span>
   </div>
 </div>
 
@@ -261,11 +350,55 @@
   </div>
 </section>
 
-<section id="nosotros" style="padding: 60px 20px; background-color: #f9f9f9;">
+<section id="nosotros" style="padding: 60px 20px 0 20px; background-color: #f9f9f9;">
   <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 2.5rem;">Nosotros</h2>
   <p style="text-align: center;">Conoce más sobre nuestra panadería.</p>
   <div style="text-align: center; margin: 20px 0;">
     <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 100px; height: auto;">
+  </div>
+  <p style="text-align: justify; max-width: 800px; margin: 0 auto;">Orgullosamente pastusos, como pastelería gourmet buscamos la perfección en cada receta para obtener los mejores sabores y texturas, nuestra especialidad es el cheesecake artesanal.</p>
+
+  <div class="slider-container slider-small" style="margin-top: 40px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);">
+    <!-- El margen izquierdo se calcula dinámicamente: -100% * índice actual -->
+    <div class="slider-track" [style.marginLeft.%]="-(currentIndex * 100)">
+      <img *ngFor="let img of images" [src]="img" class="slider-image" alt="Slider Image">
+    </div>
+    
+    <div class="slider-dots">
+      <span *ngFor="let img of images; let i = index" 
+            class="dot" 
+            [class.active]="i === currentIndex"
+            (click)="goToSlide(i); resetTimer()"></span>
+    </div>
+  </div>
+
+  <div class="ticker-wrap" style="margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);">
+    <div class="ticker-content">
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+      </span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        Domicilios Gratis en la ciudad de Pasto!
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF" style="vertical-align: middle; margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+    </div>
   </div>
 </section>
 
@@ -275,6 +408,21 @@
   <img src="assets/logos/logo.png" alt="Fretzia Bakery Logo" class="footer-logo">
   <div style="color: white; margin-top: 10px; font-size: 0.8em;">Todos los derechos reservados - Fretzia Bakery 2026</div>
 </footer>
+
+<!-- Modal de Pedido -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">&times;</button>
+    <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; margin-bottom: 20px;">Tu Pedido Actual</h2>
+    
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <span>{{ item.name }}</span>
+      <strong>x{{ item.quantity }}</strong>
+    </div>
+
+    <a [href]="whatsappLink" target="_blank" class="confirm-btn">Confirmar Pedido por WhatsApp</a>
+  </div>
+</div>
 
 <a [href]="whatsappLink" class="whatsapp-float" target="_blank">
   <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
