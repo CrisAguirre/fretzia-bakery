@@ -26,6 +26,17 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/desk/14.webp'
   ];
 
+  // Datos de los cheesecakes para la galería
+  cheesecakes = [
+    { name: 'Cheescake New York', image: 'assets/2x4/1.png', description: 'Deliciosa base crujiente con suave crema de queso y un toque de limon, decorado con frutos rojos y morados.' },
+    { name: 'Cheescake Frutos Rojos', image: 'assets/2x4/2.png', description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos.' },
+    { name: 'Cheescake Oreo', image: 'assets/2x4/3.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
+    { name: 'Cheescake Arequipe', image: 'assets/2x4/4.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
+    { name: 'Cheescake Chocolate', image: 'assets/2x4/5.png', description: 'El favorito de los amantes del chocolate, con base oscura y cubierta de galleta de chocolate.' },
+    { name: 'Cheescake Limón', image: 'assets/2x4/6.png', description: 'Tradicional, fresca y cítrica la joya de la casa, horneada y cuajada a la perfección.' }
+  ];
+
+  cart: { [name: string]: number } = {};
   currentIndex = 0;
   intervalId: any;
 
@@ -73,5 +84,25 @@ export class AppComponent implements OnInit, OnDestroy {
   onPrevClick() {
     this.prevSlide();
     this.resetTimer();
+  }
+
+  addToCart(name: string) {
+    if (!this.cart[name]) {
+      this.cart[name] = 0;
+    }
+    this.cart[name]++;
+    alert(`¡${name} agregado al pedido!`);
+  }
+
+  get whatsappLink(): string {
+    const baseUrl = 'https://wa.me/573137733408';
+    const items = Object.keys(this.cart).map(key => `${this.cart[key]}x ${key}`);
+    
+    if (items.length === 0) {
+      return baseUrl;
+    }
+
+    const message = `Hola, quisiera realizar el siguiente pedido: ${items.join(', ')}`;
+    return `${baseUrl}?text=${encodeURIComponent(message)}`;
   }
 }
