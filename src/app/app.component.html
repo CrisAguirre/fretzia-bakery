@@ -474,6 +474,7 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <button class="close-btn" (click)="closeModal()">&times;</button>
     <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; margin-bottom: 20px;">Tu Pedido Actual</h2>
+    <img src="assets/logos/logo2.png" alt="Logo Pedido" style="display: block; margin: 0 auto 20px auto; max-width: 100px; height: auto;">
     
     <div *ngFor="let item of cartItems" class="cart-item">
       <span>{{ item.name }}</span>
