@@ -242,7 +242,7 @@
   .ticker-content {
     display: inline-block;
     padding-left: 100%;
-    animation: ticker-scroll 15s linear infinite;
+    animation: ticker-scroll 43s linear infinite;
   }
   .ticker-content span {
     font-size: 1.2rem;
@@ -308,6 +308,21 @@
   }
   .confirm-btn:hover {
     background-color: #128c7e;
+  }
+  .delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .delete-btn:hover {
+    background-color: #cc0000;
   }
 </style>
 
@@ -415,7 +430,10 @@
     
     <div *ngFor="let item of cartItems" class="cart-item">
       <span>{{ item.name }}</span>
-      <strong>x{{ item.quantity }}</strong>
+      <div style="display: flex; align-items: center;">
+        <strong>x{{ item.quantity }}</strong>
+        <button class="delete-btn" (click)="removeFromCart(item.name)" title="Eliminar">&times;</button>
+      </div>
     </div>
 
     <a [href]="whatsappLink" target="_blank" class="confirm-btn">Confirmar Pedido por WhatsApp</a>

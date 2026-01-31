@@ -106,6 +106,13 @@ export class AppComponent implements OnInit, OnDestroy {
     alert(`¡${name} agregado al pedido!`);
   }
 
+  removeFromCart(name: string) {
+    delete this.cart[name];
+    if (this.cartItems.length === 0) {
+      this.closeModal();
+    }
+  }
+
   get cartItems() {
     return Object.keys(this.cart).map(key => ({ name: key, quantity: this.cart[key] }));
   }
