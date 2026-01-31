@@ -21,11 +21,11 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/desk/13.jpg',
   ];
   images3: string[] = [
-    'assets/slide-head/1.png',
-    'assets/slide-head/2.png',
-    'assets/slide-head/3.png',
-    'assets/slide-head/4.png',
-    'assets/slide-head/5.png',
+    'assets/slide-head/11.png',
+    'assets/slide-head/22.png',
+    'assets/slide-head/33.png',
+    'assets/slide-head/44.png',
+    'assets/slide-head/55.png',
   ];
 
   // Datos de los cheesecakes para la galería
