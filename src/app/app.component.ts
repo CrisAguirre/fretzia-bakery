@@ -10,7 +10,6 @@ export class AppComponent implements OnInit, OnDestroy {
   
   // Lista de imágenes con sus extensiones específicas
   images: string[] = [
-    'assets/desk/1.png',
     'assets/desk/2.jpg',
     'assets/desk/3.jpg',
     'assets/desk/4.jpg',
@@ -18,9 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/desk/6.jpg',
     'assets/desk/7.jpg',
     'assets/desk/8.jpg',
-    'assets/desk/9.png',
     'assets/desk/10.jpg',
-    'assets/desk/11.jpg',
     'assets/desk/13.jpg',
   ];
   images3: string[] = [

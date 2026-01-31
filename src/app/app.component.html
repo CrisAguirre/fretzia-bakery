@@ -57,7 +57,6 @@
     /* Estilos del Slider para Móvil (Touch) */
     .slider-container {
       overflow-x: auto; /* Habilitar scroll horizontal */
-      height: calc((100vh - 110px) * 0.5); /* Reducir altura un 50% en móvil */
       scroll-snap-type: x mandatory; /* Efecto de imán al soltar */
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
@@ -74,6 +73,9 @@
     }
     .slider-dots {
       display: none; /* Ocultar dots ya que no se sincronizan con el scroll manual */
+    }
+    .head-slider .slider-image {
+      transform: scale(0.7);
     }
   }
 
@@ -224,11 +226,11 @@
     background-color: #333;
   }
   .slider-small {
-    height: calc((100vh - 110px) * 0.6);
+    height: calc((100vh - 110px) * 0.75);
   }
   @media (max-width: 768px) {
     .slider-small {
-      height: calc((100vh - 110px) * 0.3);
+      height: calc((100vh - 110px) * 0.8);
     }
   }
 
@@ -364,8 +366,7 @@
   </nav>
 </header>
 <!-- Slide -->
-<div class="slider-container">
-  <!-- El margen izquierdo se calcula dinámicamente: -100% * índice actual -->
+<div  class="slider-container slider-small">
   <div class="slider-track" [style.marginLeft.%]="-(currentIndex3 * 100)">
     <img *ngFor="let img of images3" [src]="img" class="slider-image" alt="Slider Image">
   </div>
@@ -409,7 +410,7 @@
 <!-- Cheescakes -->
 <section id="cheescakes" style="padding: 60px 20px;">
   <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 2.5rem;">Cheescakes</h2>
-  <p style="text-align: center; font-family: 'Cheescake Monoline'">Descubre nuestra amplia variedad de sabores, disponemos de tres tamaños de cheescake:  normal (6 porciones), grande (9 porciones) y familiar (12 porciones), realiza tu pedido via whatsapp.</p>
+  <p style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 1.4rem;">Descubre nuestra amplia variedad de sabores, disponemos de tres tamaños de cheescake:  normal (6 porciones), grande (9 porciones) y familiar (12 porciones), realiza tu pedido via whatsapp.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let cake of cheesecakes">
       <img [src]="cake.image" [alt]="cake.name">
@@ -424,7 +425,7 @@
 <!-- Nosotros -->
 <section id="nosotros" style="padding: 60px 20px 0 20px; background-color: #f9f9f9;">
   <h2 style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 2.5rem;">Nosotros</h2>
-  <p style="text-align: center; font-family: 'Cheescake Monoline'">Somos una pastelería gourmet, buscamos la perfección en cada receta para obtener sabores y texturas únicos, nuestra especialidad es el cheesecake artesanal.</p>
+  <p style="text-align: center; font-family: 'Cheescake Monoline', sans-serif; font-size: 1.4rem;">Somos una pastelería gourmet, buscamos la perfección en cada receta para obtener sabores y texturas únicos, nuestra especialidad es el cheesecake artesanal.</p>
   <div style="text-align: center; margin: 20px 0;">
     <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 100px; height: auto;">
   </div>
