@@ -127,7 +127,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   get whatsappLink(): string {
-    const baseUrl = 'https://wa.me/573137733408';
+    const baseUrl = 'https://wa.me/573128033742';
     const items = Object.keys(this.cart).map(key => `${this.cart[key]}x ${key}`);
     
     if (items.length === 0) {
