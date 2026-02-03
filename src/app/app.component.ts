@@ -43,6 +43,10 @@ export class AppComponent implements OnInit, OnDestroy {
   currentIndex = 0;
   currentIndex3 = 0;
   intervalId: any;
+  
+  // Variables para touch
+  touchStartX = 0;
+  touchEndX = 0;
 
   ngOnInit() {
     this.startAutoSlide();
@@ -124,6 +128,38 @@ export class AppComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.showModal = false;
+  }
+
+  // Touch events
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(event: TouchEvent, slider: 'main' | 'secondary') {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe(slider);
+  }
+
+  handleSwipe(slider: 'main' | 'secondary') {
+    const threshold = 50; // Mínima distancia para considerar un swipe
+    if (this.touchEndX < this.touchStartX - threshold) {
+      // Swipe Left (Siguiente)
+      if (slider === 'main') {
+        this.currentIndex3 = (this.currentIndex3 + 1) % this.images3.length;
+      } else {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      }
+      this.resetTimer();
+    }
+    if (this.touchEndX > this.touchStartX + threshold) {
+      // Swipe Right (Anterior)
+      if (slider === 'main') {
+        this.currentIndex3 = (this.currentIndex3 - 1 + this.images3.length) % this.images3.length;
+      } else {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      }
+      this.resetTimer();
+    }
   }
 
   get whatsappLink(): string {
