@@ -24,8 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/slide-head/11.png',
     'assets/slide-head/22.png',
     'assets/slide-head/33.png',
-    'assets/slide-head/44.png',
-    'assets/slide-head/55.png',
+    //'assets/slide-head/44.png',
+    //'assets/slide-head/55.png',
   ];
 
   // Datos de los cheesecakes para la galería
