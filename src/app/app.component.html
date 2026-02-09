@@ -141,9 +141,6 @@
     .slider-dots {
       display: none; /* Ocultar dots ya que no se sincronizan con el scroll manual */
     }
-    .head-slider .slider-image {
-      transform: scale(0.7);
-    }
   }
 
   /* Estilos del Slider */
@@ -163,6 +160,10 @@
     width: 7.142%; /* 100% / 14 imágenes */
     height: 100%;
     object-fit: cover;
+  }
+  .head-slider .slider-image {
+    object-fit: contain;
+    background-color: black;
   }
 
   /* Estilos de los Dots (Indicadores de posición) */
@@ -433,7 +434,7 @@
   </nav>
 </header>
 <!-- Slide -->
-<div  class="slider-container slider-small" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'main')">
+<div  class="slider-container slider-small head-slider" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'main')">
   <div class="slider-track" [style.marginLeft.%]="-(currentIndex3 * 100)">
     <img *ngFor="let img of images3" [src]="img" class="slider-image" alt="Slider Image">
   </div>
