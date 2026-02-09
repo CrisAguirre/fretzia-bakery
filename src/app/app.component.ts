@@ -1,5 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+interface ProductOption {
+  label: string;
+  price: number;
+}
+
+interface Product {
+  name: string;
+  image: string;
+  description: string;
+  options?: ProductOption[];
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,25 +41,75 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   // Datos de los cheesecakes para la galería
-  cheesecakes = [
-    { name: 'Cheescake Limón', image: 'assets/2x4/1.png', description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.' },
-    { name: 'Cheescake New York', image: 'assets/2x4/2.png', description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.' },
+  cheesecakes: Product[] = [
+    { 
+      name: 'Cheescake Limón', 
+      image: 'assets/2x4/1.png', 
+      description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
+      options: [
+        { label: 'Familiar (12 porciones)', price: 45000 },
+        { label: 'Grande (10 porciones)', price: 38000 },
+        { label: 'Mediano (8 porciones)', price: 30000 }
+      ]
+    },
+    { 
+      name: 'Cheescake New York', 
+      image: 'assets/2x4/2.png', 
+      description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
+      options: [
+        { label: 'Familiar (12 porciones)', price: 55000 },
+        { label: 'Grande (10 porciones)', price: 48000 },
+        { label: 'Mediano (8 porciones)', price: 40000 }
+      ]
+    },
     { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
     { name: 'Cheescake Oreo', image: 'assets/2x4/4.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
     { name: 'Cheescake Chocolate', image: 'assets/2x4/5.png', description: 'El favorito de los amantes del chocolate, con base oscura y cubierta de galleta de chocolate.' },
   ];
 
-  pies = [
-    { name: 'Pie de Cereza', image: 'assets/2x4/6.png', description: 'Un clásico pie con un relleno jugoso de cerezas y una base crujiente.' },
-    { name: 'Pie de Manzana', image: 'assets/2x4/7.png', description: 'Tradicional pie de manzana con canela y una cubierta de masa perfecta.' }
+  pies: Product[] = [
+    { 
+      name: 'Pie de Cereza', 
+      image: 'assets/2x4/6.png', 
+      description: 'Un clásico pie con un relleno jugoso de cerezas y una base crujiente.',
+      options: [
+        { label: 'Grande', price: 40000 },
+        { label: 'Mediano', price: 25000 }
+      ]
+    },
+    { 
+      name: 'Pie de Manzana', 
+      image: 'assets/2x4/7.png', 
+      description: 'Tradicional pie de manzana con canela y una cubierta de masa perfecta.',
+      options: [
+        { label: 'Grande', price: 35000 },
+        { label: 'Mediano', price: 20000 }
+      ]
+    }
   ];
 
-  cookies = [
-    { name: 'Galletas Red Velvet', image: 'assets/2x4/8.png', description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco.' }
+  cookies: Product[] = [
+    { 
+      name: 'Galletas Red Velvet', 
+      image: 'assets/2x4/8.png', 
+      description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco.',
+      options: [
+        { label: '6 Unidades', price: 18000 },
+        { label: '12 Unidades', price: 30000 },
+        { label: '24 Unidades', price: 54000 }
+      ]
+    }
   ];
 
-  cart: { [name: string]: number } = {};
-  showModal = false;
+  // Carrito y Modales
+  cart: { product: Product, option: ProductOption, quantity: number }[] = [];
+  
+  showProductModal = false;
+  showCartModal = false;
+  
+  selectedProduct: Product | null = null;
+  selectedOption: ProductOption | null = null;
+
   currentIndex = 0;
   currentIndex3 = 0;
   intervalId: any;
@@ -107,35 +169,72 @@ export class AppComponent implements OnInit, OnDestroy {
     this.resetTimer();
   }
 
+  // --- Lógica del Carrito y Modales ---
+
   addToCart(name: string) {
-    if (!this.cart[name]) {
-      this.cart[name] = 0;
+    // Buscar el producto en todas las categorías
+    const product = [...this.cheesecakes, ...this.pies, ...this.cookies].find(p => p.name === name);
+    
+    if (product) {
+      if (product.options && product.options.length > 0) {
+        // Si tiene opciones, abrir modal de selección
+        this.selectedProduct = product;
+        this.selectedOption = null; // Resetear selección
+        this.showProductModal = true;
+      } else {
+        // Si no tiene opciones configuradas (ej. Oreo, Pies), agregar directamente con precio 0 o estándar
+        // O mostrar alerta si la regla es estricta para todos
+        alert('Este producto requiere consultar precio. Contáctanos por WhatsApp.');
+      }
     }
-    this.cart[name]++;
-    alert(`¡${name} agregado al pedido!`);
   }
 
-  removeFromCart(name: string) {
-    delete this.cart[name];
-    if (this.cartItems.length === 0) {
-      this.closeModal();
-    }
+  selectOption(option: ProductOption) {
+    this.selectedOption = option;
   }
 
-  get cartItems() {
-    return Object.keys(this.cart).map(key => ({ name: key, quantity: this.cart[key] }));
-  }
+  confirmAddToOrder() {
+    if (this.selectedProduct && this.selectedOption) {
+      const existingItem = this.cart.find(item => 
+        item.product.name === this.selectedProduct!.name && 
+        item.option.label === this.selectedOption!.label
+      );
 
-  openModal() {
-    if (this.cartItems.length > 0) {
-      this.showModal = true;
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        this.cart.push({
+          product: this.selectedProduct,
+          option: this.selectedOption,
+          quantity: 1
+        });
+      }
+
+      this.closeModals();
+      // Opcional: Abrir el carrito automáticamente o mostrar mensaje flotante
+      this.openCartModal(); 
     } else {
-      alert('Aún no has agregado productos al pedido.');
+      alert('Por favor selecciona un tamaño.');
     }
   }
 
-  closeModal() {
-    this.showModal = false;
+  removeFromCart(index: number) {
+    this.cart.splice(index, 1);
+  }
+
+  openCartModal() {
+    this.showCartModal = true;
+  }
+
+  closeModals() {
+    this.showProductModal = false;
+    this.showCartModal = false;
+    this.selectedProduct = null;
+    this.selectedOption = null;
+  }
+
+  get cartTotal(): number {
+    return this.cart.reduce((total, item) => total + (item.option.price * item.quantity), 0);
   }
 
   // Touch events
@@ -172,13 +271,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   get whatsappLink(): string {
     const baseUrl = 'https://wa.me/573128033742';
-    const items = Object.keys(this.cart).map(key => `${this.cart[key]}x ${key}`);
     
-    if (items.length === 0) {
+    if (this.cart.length === 0) {
       return baseUrl;
     }
 
-    const message = `Hola, quisiera realizar el siguiente pedido: ${items.join(', ')}`;
+    const items = this.cart.map(item => 
+      `${item.quantity}x ${item.product.name} (${item.option.label}) - $${item.option.price * item.quantity}`
+    );
+    
+    const message = `Hola, quisiera realizar el siguiente pedido:\n${items.join('\n')}\n\nTotal: $${this.cartTotal}`;
     return `${baseUrl}?text=${encodeURIComponent(message)}`;
   }
 }

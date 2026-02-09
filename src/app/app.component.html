@@ -423,6 +423,33 @@
     height: 30px;
     fill: black;
   }
+  /* Estilos para opciones de producto */
+  .option-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+  }
+  .option-btn.selected {
+    background-color: black;
+    color: white;
+    border-color: black;
+  }
+  .cart-total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 15px;
+    border-top: 2px solid #eee;
+    padding-top: 10px;
+    font-family: 'Cheescake Sans', sans-serif;
+  }
 </style>
 <!-- Menu Head -->
 <header>
@@ -433,7 +460,7 @@
     <a style="font-size: 1.5rem; " href="#cheescakes">Cheescakes</a>
     <a style="font-size: 1.5rem; " href="#pies">Pies</a>
     <a style="font-size: 1.5rem; " href="#cookies">Cookies</a>
-    <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openModal()">Mi Pedido</a>
+    <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openCartModal()">Mi Pedido</a>
   </nav>
 </header>
 <!-- Slide -->
@@ -594,7 +621,7 @@
         <a href="#pies">Pies</a>
         <a href="#cookies">Cookies</a>
         <a href="#nosotros">Nosotros</a>
-        <a href="javascript:void(0)" (click)="openModal()">Mi Pedido</a>
+        <a href="javascript:void(0)" (click)="openCartModal()">Mi Pedido</a>
       </div>
     </div>
 
@@ -613,26 +640,54 @@
     Derechos Reservados - Fretzia Bakery® 2026
   </div>
 </footer>
-<!-- Modal de Pedido -->
-<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+
+<!-- Modal de Selección de Producto (Tamaños) -->
+<div class="modal-overlay" *ngIf="showProductModal" (click)="closeModals()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="closeModal()">&times;</button>
+    <button class="close-btn" (click)="closeModals()">&times;</button>
+    <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; margin-bottom: 10px;" *ngIf="selectedProduct">{{ selectedProduct.name }}</h2>
+    <p style="text-align: center; margin-bottom: 20px;">Selecciona un tamaño:</p>
+    
+    <div *ngIf="selectedProduct">
+      <button *ngFor="let option of selectedProduct.options" 
+              class="option-btn" 
+              [class.selected]="selectedOption === option"
+              (click)="selectOption(option)">
+        {{ option.label }} - ${{ option.price | number }}
+      </button>
+    </div>
+
+    <button class="confirm-btn" style="background-color: black;" (click)="confirmAddToOrder()">Agregar al Carrito</button>
+  </div>
+</div>
+
+<!-- Modal de Carrito de Compras -->
+<div class="modal-overlay" *ngIf="showCartModal" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModals()">&times;</button>
     <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; margin-bottom: 20px;">Tu Pedido Actual</h2>
     <img src="assets/logos/logo2.png" alt="Logo Pedido" style="display: block; margin: 0 auto 20px auto; max-width: 100px; height: auto;">
     
-    <div *ngFor="let item of cartItems" class="cart-item">
-      <span>{{ item.name }}</span>
+    <div *ngFor="let item of cart; let i = index" class="cart-item">
+      <span>{{ item.product.name }} <small>({{ item.option.label }})</small></span>
       <div style="display: flex; align-items: center;">
         <strong>x{{ item.quantity }}</strong>
-        <button class="delete-btn" (click)="removeFromCart(item.name)" title="Eliminar">&times;</button>
+        <button class="delete-btn" (click)="removeFromCart(i)" title="Eliminar">&times;</button>
       </div>
+    </div>
+    
+    <div class="cart-total" *ngIf="cart.length > 0">
+      Total: ${{ cartTotal | number }}
+    </div>
+    <div *ngIf="cart.length === 0" style="text-align: center; margin: 20px 0;">
+      Tu carrito está vacío.
     </div>
 
     <a [href]="whatsappLink" target="_blank" class="confirm-btn">Confirmar Pedido por WhatsApp</a>
   </div>
 </div>
 <!-- Cart -->
-<div class="cart-float" *ngIf="cartItems.length > 0" (click)="openModal()">
+<div class="cart-float" *ngIf="cart.length > 0" (click)="openCartModal()">
   <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
   </svg>
