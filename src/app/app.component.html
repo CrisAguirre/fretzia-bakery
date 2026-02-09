@@ -496,13 +496,33 @@
 <!-- Pies o Tartas -->
 <section id="pies" style="padding: 60px 20px; background-color: #f9f9f9;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Pies</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Próximamente deliciosas tartas.</p>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Nuestros pies caseros, horneados a la perfección.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" *ngFor="let pie of pies">
+      <img [src]="pie.image" [alt]="pie.name">
+      <div class="gallery-overlay">
+        <h3>{{ pie.name }}</h3>
+        <p class="description">{{ pie.description }}</p>
+        <button class="add-btn" (click)="addToCart(pie.name)">Agregar a pedido</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Cookies o Galletas -->
 <section id="cookies" style="padding: 60px 20px;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cookies</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Próximamente crujientes y deliciosas galletas.</p>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Galletas recién horneadas, crujientes por fuera, suaves por dentro.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" *ngFor="let cookie of cookies">
+      <img [src]="cookie.image" [alt]="cookie.name">
+      <div class="gallery-overlay">
+        <h3>{{ cookie.name }}</h3>
+        <p class="description">{{ cookie.description }}</p>
+        <button class="add-btn" (click)="addToCart(cookie.name)">Agregar a pedido</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Nosotros -->

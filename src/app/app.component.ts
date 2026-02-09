@@ -30,12 +30,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Datos de los cheesecakes para la galería
   cheesecakes = [
-    { name: 'Cheescake New York', image: 'assets/2x4/1.png', description: 'Deliciosa base crujiente con suave crema de queso y un toque de limon, decorado con frutos rojos y morados.' },
-    { name: 'Cheescake Frutos Rojos', image: 'assets/2x4/2.png', description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos.' },
-    { name: 'Cheescake Oreo', image: 'assets/2x4/3.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
-    { name: 'Cheescake Arequipe', image: 'assets/2x4/4.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
+    { name: 'Cheescake Limón', image: 'assets/2x4/1.png', description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.' },
+    { name: 'Cheescake New York', image: 'assets/2x4/2.png', description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.' },
+    { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
+    { name: 'Cheescake Oreo', image: 'assets/2x4/4.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
     { name: 'Cheescake Chocolate', image: 'assets/2x4/5.png', description: 'El favorito de los amantes del chocolate, con base oscura y cubierta de galleta de chocolate.' },
-    { name: 'Cheescake Limón', image: 'assets/2x4/6.png', description: 'Tradicional, fresca y cítrica la joya de la casa, horneada y cuajada a la perfección.' }
+  ];
+
+  pies = [
+    { name: 'Pie de Cereza', image: 'assets/2x4/6.png', description: 'Un clásico pie con un relleno jugoso de cerezas y una base crujiente.' },
+    { name: 'Pie de Manzana', image: 'assets/2x4/7.png', description: 'Tradicional pie de manzana con canela y una cubierta de masa perfecta.' }
+  ];
+
+  cookies = [
+    { name: 'Galletas Red Velvet', image: 'assets/2x4/8.png', description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco.' }
   ];
 
   cart: { [name: string]: number } = {};
