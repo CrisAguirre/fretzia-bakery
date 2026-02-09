@@ -429,8 +429,9 @@
   <img href="/"src="assets/logos/logo.png" alt="Fretzia Bakery Logo" class="header-logo">
   <nav>
     <a style="font-size: 1.5rem; " href="#cheescakes">Cheescakes</a>
-    <a style="font-size: 1.5rem; " href="#nosotros">Nosotros</a>
-    <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openModal()">Pedido</a>
+    <a style="font-size: 1.5rem; " href="#pies">Pies</a>
+    <a style="font-size: 1.5rem; " href="#cookies">Cookies</a>
+    <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openModal()">Mi Pedido</a>
   </nav>
 </header>
 <!-- Slide -->
@@ -478,7 +479,7 @@
 <!-- Cheescakes -->
 <section id="cheescakes" style="padding: 60px 20px;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cheescakes</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Descubre nuestra amplia variedad de sabores, disponemos de tres tamaños de cheescake:  normal de 8 porciones, mediana de 10 y grande de 12 porciones.</p>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Ofrecemos variedad de sabores y tamaños en cheescake.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let cake of cheesecakes">
       <img [src]="cake.image" [alt]="cake.name">
@@ -490,6 +491,18 @@
     </div>
   </div>
 </section>
+<!-- Pies o Tartas -->
+<section id="pies" style="padding: 60px 20px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Pies</h2>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Próximamente deliciosas tartas.</p>
+</section>
+
+<!-- Cookies o Galletas -->
+<section id="cookies" style="padding: 60px 20px;">
+  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cookies</h2>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Próximamente crujientes y deliciosas galletas.</p>
+</section>
+
 <!-- Nosotros -->
 <section id="nosotros" style="padding: 60px 20px 0 20px; background-color: #f9f9f9;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Nosotros</h2>
@@ -548,7 +561,7 @@
     <div class="footer-column">
       <img src="assets/logos/logo.png" alt="Fretzia Bakery Logo" class="footer-logo" style="margin-bottom: 15px;">
       <p>El mejor cheesecake en Pasto!</p>
-      <p>Tortas y Postres hechos con amor y dedicación.</p>
+      <p>Tortas frías, pies y galletas hechas con amor y dedicación.</p>
     </div>
 
     <!-- Columna 2: Enlaces -->
@@ -556,6 +569,8 @@
       <h3>Navegación</h3>
       <div class="footer-links">
         <a href="#cheescakes">Cheescakes</a>
+        <a href="#pies">Pies</a>
+        <a href="#cookies">Cookies</a>
         <a href="#nosotros">Nosotros</a>
         <a href="javascript:void(0)" (click)="openModal()">Mi Pedido</a>
       </div>
