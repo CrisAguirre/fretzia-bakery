@@ -94,9 +94,9 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/8.png', 
       description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco.',
       options: [
-        { label: '6 Unidades', price: 18000 },
-        { label: '12 Unidades', price: 30000 },
-        { label: '24 Unidades', price: 54000 }
+        { label: '3 Unidades', price: 27000 },
+        { label: '6 Unidades', price: 45000 },
+        { label: '12 Unidades', price: 80000 }
       ]
     }
   ];
