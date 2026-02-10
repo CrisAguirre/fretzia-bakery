@@ -113,6 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
   currentIndex = 0;
   currentIndex3 = 0;
   intervalId: any;
+  isPaused = false;
   
   // Variables para touch
   touchStartX = 0;
@@ -156,7 +157,20 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-    this.startAutoSlide();
+    if (!this.isPaused) {
+      this.startAutoSlide();
+    }
+  }
+
+  togglePause() {
+    this.isPaused = !this.isPaused;
+    if (this.isPaused) {
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+      }
+    } else {
+      this.startAutoSlide();
+    }
   }
 
   onNextClick() {
@@ -167,6 +181,28 @@ export class AppComponent implements OnInit, OnDestroy {
   onPrevClick() {
     this.prevSlide();
     this.resetTimer();
+  }
+
+  getMiddleIndex(count: number): number {
+    return Math.floor(count / 2);
+  }
+
+  onDotClick(index: number) {
+    if (this.currentIndex === index) {
+      this.togglePause();
+    } else {
+      this.goToSlide(index);
+      this.resetTimer();
+    }
+  }
+
+  onDotClick3(index: number) {
+    if (this.currentIndex3 === index) {
+      this.togglePause();
+    } else {
+      this.goToSlide3(index);
+      this.resetTimer();
+    }
   }
 
   // --- Lógica del Carrito y Modales ---
