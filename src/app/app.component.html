@@ -355,6 +355,9 @@
     position: relative;
     font-family: sans-serif;
   }
+  .modal-content h2 {
+    font-size: 1.8rem;
+  }
   .close-btn {
     position: absolute;
     top: 10px;
@@ -369,7 +372,7 @@
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding: 10px 0;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
   .confirm-btn {
     display: block;
@@ -381,7 +384,7 @@
     text-decoration: none;
     margin-top: 20px;
     /*font-weight: bold;*/
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     transition: background-color 0.3s;
   }
   .confirm-btn:hover {
@@ -439,7 +442,7 @@
     background: white;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     transition: all 0.3s;
   }
   .option-btn.selected {
@@ -448,7 +451,7 @@
     border-color: black;
   }
   .cart-total {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     text-align: right;
     margin-top: 15px;
@@ -584,7 +587,7 @@
 <!-- Cheescakes -->
 <section id="cheescakes" style="padding: 60px 20px;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cheescakes</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Ofrecemos variedad de sabores y tamaños en cheescake.</p>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;"> Prueba la auténtica receta clásica sabor a crema de leche y queso, conoce nuestras distintas presentaciones y comparte esas fechas especiales con el mejor sabor.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let cake of cheesecakes">
       <img [src]="cake.image" [alt]="cake.name">
@@ -599,7 +602,7 @@
 <!-- Pies o Tartas -->
 <section id="pies" style="padding: 60px 20px; background-color: #f9f9f9;">
   <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Pies</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Prueba las mejores tartas de cereza y manzana con una receta de estilo americano.</p>
+  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Tartas con relleno de cereza o manzana, de corte clásico americano, proximamente sabor a chilacuán.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let pie of pies">
       <img [src]="pie.image" [alt]="pie.name">
@@ -738,7 +741,7 @@
       </button>
     </div>
 
-    <button class="confirm-btn" style="background-color: black;" (click)="confirmAddToOrder()">Agregar al Carrito</button>
+    <button class="confirm-btn" style="background-color: black; margin: 20px auto;" (click)="confirmAddToOrder()">Agregar al Carrito</button>
   </div>
 </div>
 
