@@ -456,6 +456,43 @@
     padding-top: 10px;
     font-family: 'Cheescake Sans', sans-serif;
   }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    display: none;
+    pointer-events: none;
+  }
+  .scroll-indicator svg {
+    width: 40px;
+    height: 40px;
+    fill: rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  @media (max-width: 1024px) {
+    .scroll-indicator {
+      display: block;
+      animation: scrollDownAnim 2.5s ease-in-out 3 forwards;
+    }
+  }
+  @keyframes scrollDownAnim {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(10px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+  }
 </style>
 <!-- Menu Head -->
 <header>
@@ -485,6 +522,9 @@
         <span *ngIf="!isPaused" style="font-size: 6px; color: black; font-weight: bold;">&#10074;&#10074;</span>
       </ng-container>
     </span>
+  </div>
+  <div class="scroll-indicator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
   </div>
 </div>
 <!-- Caroussel -->
