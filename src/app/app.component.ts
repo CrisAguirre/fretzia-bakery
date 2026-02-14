@@ -33,33 +33,35 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/desk/13.jpg',
   ];
   images3: string[] = [
-    'assets/slide-head/11.png',
-    'assets/slide-head/22.png',
-    'assets/slide-head/33.png',
-    'assets/slide-head/44.png',
-    'assets/slide-head/55.png',
+    'assets/slide-head/1.png',
+    'assets/slide-head/2.png',
+    'assets/slide-head/3.png',
+    'assets/slide-head/4.png',
+    'assets/slide-head/5.png',
+    'assets/slide-head/6.png',
+
   ];
 
   // Datos de los cheesecakes para la galería
   cheesecakes: Product[] = [
     { 
-      name: 'Cheescake Limón', 
+      name: 'Cheescake New York', 
       image: 'assets/2x4/1.png', 
+      description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
+      options: [
+        { label: 'Familiar (12 porciones)', price: 60000 },
+        { label: 'Grande (10 porciones)', price: 52000 },
+        { label: 'Mediano (8 porciones)', price: 45000 }
+      ]
+    },
+    { 
+      name: 'Cheescake Limón', 
+      image: 'assets/2x4/2.png', 
       description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
       options: [
         { label: 'Familiar (12 porciones)', price: 45000 },
         { label: 'Grande (10 porciones)', price: 38000 },
         { label: 'Mediano (8 porciones)', price: 30000 }
-      ]
-    },
-    { 
-      name: 'Cheescake New York', 
-      image: 'assets/2x4/2.png', 
-      description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
-      options: [
-        { label: 'Familiar (12 porciones)', price: 55000 },
-        { label: 'Grande (10 porciones)', price: 48000 },
-        { label: 'Mediano (8 porciones)', price: 40000 }
       ]
     },
     { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
@@ -94,9 +96,9 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/8.png', 
       description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco.',
       options: [
-        { label: '3 Unidades', price: 27000 },
-        { label: '6 Unidades', price: 45000 },
-        { label: '12 Unidades', price: 80000 }
+        { label: '4 Unidades', price: 35000 },
+        { label: '6 Unidades', price: 50000 },
+        { label: '8 Unidades', price: 65000 }
       ]
     }
   ];
