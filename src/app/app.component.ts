@@ -36,8 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/slide-head/1.png',
     'assets/slide-head/2.png',
     'assets/slide-head/3.png',
-    'assets/slide-head/4.png',
     'assets/slide-head/5.png',
+    'assets/slide-head/4.png',
     'assets/slide-head/6.png',
 
   ];
@@ -49,9 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/1.png', 
       description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
       options: [
-        { label: 'Familiar (12 porciones)', price: 60000 },
-        { label: 'Grande (10 porciones)', price: 52000 },
-        { label: 'Mediano (8 porciones)', price: 45000 }
+        { label: 'Familiar - 12 porciones', price: 60000 },
+        { label: 'Grande - 10 porciones', price: 52000 },
+        { label: 'Mediano - 8 porciones', price: 45000 }
       ]
     },
     { 
@@ -59,9 +59,9 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/2.png', 
       description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
       options: [
-        { label: 'Familiar (12 porciones)', price: 45000 },
-        { label: 'Grande (10 porciones)', price: 38000 },
-        { label: 'Mediano (8 porciones)', price: 30000 }
+        { label: 'Familiar - 12 porciones', price: 45000 },
+        { label: 'Grande - 10 porciones', price: 38000 },
+        { label: 'Mediano -8 porciones', price: 30000 }
       ]
     },
     { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { 
       name: 'Pie de Cereza', 
       image: 'assets/2x4/6.png', 
-      description: 'Un clásico pie con un relleno jugoso de cerezas y una base crujiente.',
+      description: 'Un clásico pie al estilo americano, con relleno de cerezas caramelizadasy una corteza crujiente.',
       options: [
         { label: 'Grande', price: 40000 },
         { label: 'Mediano', price: 25000 }
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { 
       name: 'Pie de Manzana', 
       image: 'assets/2x4/7.png', 
-      description: 'Tradicional pie de manzana con canela y una cubierta de masa perfecta.',
+      description: 'Tradicional pie de manzanas caramelizadas al mejor estilo americano, con canela y corteza crujiente.',
       options: [
         { label: 'Grande', price: 35000 },
         { label: 'Mediano', price: 20000 }
