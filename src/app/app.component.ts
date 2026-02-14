@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { 
       name: 'Pie de Cereza', 
       image: 'assets/2x4/6.png', 
-      description: 'Un clásico pie al estilo americano, con relleno de cerezas caramelizadasy una corteza crujiente.',
+      description: 'Un clásico pie al estilo americano, con relleno de cerezas caramelizadas y una corteza crujiente.',
       options: [
         { label: 'Grande', price: 40000 },
         { label: 'Mediano', price: 25000 }
