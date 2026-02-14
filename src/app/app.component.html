@@ -190,7 +190,7 @@
   }
   .dot.active {
     background-color: white;
-    transform: scale(1.8);
+    transform: scale(1.4);
   }
 
   /* Botón flotante de WhatsApp */
@@ -470,7 +470,7 @@
   .scroll-indicator svg {
     width: 40px;
     height: 40px;
-    fill: rgba(255, 255, 255, 0.6);
+    fill: #000000;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
   }
   @media (max-width: 1024px) {
@@ -494,6 +494,30 @@
       transform: translateX(-50%) translateY(20px);
     }
   }
+
+  /* Play/Pause Animation Overlay */
+  .state-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 0.5s ease-out forwards;
+  }
+  .state-indicator svg {
+    width: 40px;
+    height: 40px;
+    fill: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  }
+  @keyframes fadeOut {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+  }
 </style>
 <!-- Menu Head -->
 <header>
@@ -508,7 +532,7 @@
   </nav>
 </header>
 <!-- Slide -->
-<div  class="slider-container slider-small head-slider" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'main')">
+<div  class="slider-container slider-small head-slider" (click)="togglePauseWithAnimation()" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'main')">
   <div class="slider-track" [style.marginLeft.%]="-(currentIndex3 * 100)">
     <img *ngFor="let img of images3" [src]="img" class="slider-image" alt="Slider Image">
   </div>
@@ -517,15 +541,15 @@
     <span *ngFor="let img of images3; let i = index" 
           class="dot" 
           [class.active]="i === currentIndex3"
-          (click)="onDotClick3(i)">
-      <ng-container *ngIf="i === currentIndex3">
-        <span *ngIf="isPaused" style="font-size: 6px; color: black;">&#9658;</span>
-        <span *ngIf="!isPaused" style="font-size: 6px; color: black; font-weight: bold;">&#10074;&#10074;</span>
-      </ng-container>
+          (click)="$event.stopPropagation(); onDotClick3(i)">
     </span>
   </div>
   <div class="scroll-indicator" *ngIf="showScrollIndicator">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+  </div>
+  <div class="state-indicator" *ngIf="animationState">
+    <svg *ngIf="animationState === 'play'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg *ngIf="animationState === 'pause'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
   </div>
 </div>
 <!-- Caroussel -->
@@ -611,7 +635,7 @@
   <div style="text-align: center; margin: 20px 0;">
     <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 100px; height: auto;">
   </div>
-  <div class="slider-container slider-small" style="margin-top: 40px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'secondary')">
+  <div class="slider-container slider-small" style="margin-top: 40px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);" (click)="togglePauseWithAnimation()" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event, 'secondary')">
     <!-- El margen izquierdo se calcula dinámicamente: -100% * índice actual -->
     <div class="slider-track" [style.marginLeft.%]="-(currentIndex * 100)">
       <img *ngFor="let img of images" [src]="img" class="slider-image" alt="Slider Image">
@@ -621,12 +645,12 @@
       <span *ngFor="let img of images; let i = index" 
             class="dot" 
             [class.active]="i === currentIndex"
-            (click)="onDotClick(i)">
-        <ng-container *ngIf="i === currentIndex">
-          <span *ngIf="isPaused" style="font-size: 6px; color: black;">&#9658;</span>
-          <span *ngIf="!isPaused" style="font-size: 6px; color: black; font-weight: bold;">&#10074;&#10074;</span>
-        </ng-container>
+            (click)="$event.stopPropagation(); onDotClick(i)">
       </span>
+    </div>
+    <div class="state-indicator" *ngIf="animationState">
+      <svg *ngIf="animationState === 'play'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg *ngIf="animationState === 'pause'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </div>
   </div>
 </section>

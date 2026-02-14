@@ -122,6 +122,10 @@ export class AppComponent implements OnInit, OnDestroy {
   touchStartX = 0;
   touchEndX = 0;
 
+  // Animation State
+  animationState: 'play' | 'pause' | null = null;
+  animationTimeout: any;
+
   ngOnInit() {
     this.startAutoSlide();
   }
@@ -186,6 +190,21 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  togglePauseWithAnimation() {
+    this.togglePause();
+    this.triggerAnimation(this.isPaused ? 'pause' : 'play');
+  }
+
+  triggerAnimation(state: 'play' | 'pause') {
+    this.animationState = state;
+    if (this.animationTimeout) {
+      clearTimeout(this.animationTimeout);
+    }
+    this.animationTimeout = setTimeout(() => {
+      this.animationState = null;
+    }, 500);
+  }
+
   onNextClick() {
     this.nextSlide();
     this.resetTimer();
@@ -201,21 +220,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onDotClick(index: number) {
-    if (this.currentIndex === index) {
-      this.togglePause();
-    } else {
-      this.goToSlide(index);
-      this.resetTimer();
-    }
+    this.goToSlide(index);
+    this.resetTimer();
   }
 
   onDotClick3(index: number) {
-    if (this.currentIndex3 === index) {
-      this.togglePause();
-    } else {
-      this.goToSlide3(index);
-      this.resetTimer();
-    }
+    this.goToSlide3(index);
+    this.resetTimer();
   }
 
   // --- Lógica del Carrito y Modales ---
