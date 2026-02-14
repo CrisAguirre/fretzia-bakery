@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
 interface ProductOption {
   label: string;
@@ -116,6 +116,7 @@ export class AppComponent implements OnInit, OnDestroy {
   currentIndex3 = 0;
   intervalId: any;
   isPaused = false;
+  showScrollIndicator = true;
   
   // Variables para touch
   touchStartX = 0;
@@ -135,6 +136,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.nextSlide();
     }, 4000);
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const windowHeight = window.innerHeight;
+    const bodyHeight = document.documentElement.scrollHeight;
+
+    // Ocultar cuando se llega al footer (cerca del final de la página)
+    this.showScrollIndicator = (scrollPosition + windowHeight) < (bodyHeight - 50);
   }
 
   nextSlide() {
