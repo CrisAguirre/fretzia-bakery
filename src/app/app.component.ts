@@ -15,7 +15,14 @@ interface Product {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] // Asumiendo que existe o se usa styles.css global
+  styleUrls: ['./app.component.css'],
+  styles: [`
+    @media (min-width: 1080px) {
+      .slider-image {
+        object-fit: cover;
+      }
+    }
+  `]
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'FretziaBakery';
@@ -36,10 +43,9 @@ export class AppComponent implements OnInit, OnDestroy {
     'assets/slide-head/1.png',
     'assets/slide-head/2.png',
     'assets/slide-head/3.png',
-    'assets/slide-head/5.png',
     'assets/slide-head/4.png',
+    'assets/slide-head/5.png',
     'assets/slide-head/6.png',
-
   ];
 
   // Datos de los cheesecakes para la galería
@@ -151,9 +157,23 @@ export class AppComponent implements OnInit, OnDestroy {
   updateResponsiveImage() {
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 768) {
-        this.images3[0] = 'assets/4k/0.png';
+        this.images3 = [
+          'assets/4k/0.png',
+          'assets/4k/1.png',
+          'assets/4k/2.png',
+          'assets/4k/3.png',
+          'assets/4k/4.png',
+          'assets/4k/5.png',
+        ];
       } else {
-        this.images3[0] = 'assets/slide-head/1.png';
+        this.images3 = [
+          'assets/slide-head/1.png',
+          'assets/slide-head/2.png',
+          'assets/slide-head/3.png',
+          'assets/slide-head/4.png',
+          'assets/slide-head/5.png',
+          'assets/slide-head/6.png',
+        ];
       }
     }
   }
