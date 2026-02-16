@@ -128,6 +128,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startAutoSlide();
+    this.updateResponsiveImage();
   }
 
   ngOnDestroy() {
@@ -140,6 +141,21 @@ export class AppComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.nextSlide();
     }, 4000);
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.updateResponsiveImage();
+  }
+
+  updateResponsiveImage() {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth >= 768) {
+        this.images3[0] = 'assets/4k/0.png';
+      } else {
+        this.images3[0] = 'assets/slide-head/1.png';
+      }
+    }
   }
 
   @HostListener('window:scroll', [])
