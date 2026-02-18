@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
       options: [
         { label: 'Familiar 12 porciones', price: 60000 },
         { label: 'Grande 10 porciones', price: 52000 },
-        { label: 'Mediano 8 porciones', price: 45000 }
+        { label: 'Mediana 8 porciones', price: 45000 }
       ]
     },
     { 
@@ -65,9 +65,9 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/2.png', 
       description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
       options: [
-        { label: 'Familiar 12 porciones', price: 45000 },
-        { label: 'Grande 10 porciones', price: 38000 },
-        { label: 'Mediano 8 porciones', price: 30000 }
+        { label: 'Familiar 12 porciones', price: 48000 },
+        { label: 'Grande 10 porciones', price: 42000 },
+        { label: 'Mediana 8 porciones', price: 35000 }
       ]
     },
     { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
       description: 'Un clásico pie al estilo americano, con relleno de cerezas caramelizadas y una corteza crujiente.',
       options: [
         { label: 'Grande 8 porciones', price: 40000 },
-        { label: 'Mediano 6 porciones', price: 25000 }
+        { label: 'Mediano 6 porciones', price: 30000 }
       ]
     },
     { 
@@ -90,8 +90,8 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/7.png', 
       description: 'Tradicional pie de manzanas caramelizadas al mejor estilo americano, con canela y corteza crujiente.',
       options: [
-        { label: 'Grande 8 porciones', price: 35000 },
-        { label: 'Mediano 6 porciones', price: 20000 }
+        { label: 'Grande 8 porciones', price: 36000 },
+        { label: 'Mediano 6 porciones', price: 27000 }
       ]
     }
   ];
