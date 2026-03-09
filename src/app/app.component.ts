@@ -120,6 +120,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   currentIndex = 0;
   currentIndex3 = 0;
+  prevIndex3 = 0;
+  slideState: 'idle' | 'transitioning' = 'idle';
+  private slideTransitionDuration = 900; // ms — debe coincidir con la animación CSS
   intervalId: any;
   isPaused = false;
   showScrollIndicator = true;
@@ -190,7 +193,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    this.currentIndex3 = (this.currentIndex3 + 1) % this.images3.length;
+    this.goToSlide3((this.currentIndex3 + 1) % this.images3.length);
   }
 
   prevSlide() {
@@ -202,7 +205,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   goToSlide3(index: number) {
+    if (this.slideState === 'transitioning' || index === this.currentIndex3) return;
+    this.prevIndex3 = this.currentIndex3;
     this.currentIndex3 = index;
+    this.slideState = 'transitioning';
+    setTimeout(() => {
+      this.slideState = 'idle';
+    }, this.slideTransitionDuration);
   }
 
   // Reiniciar el timer cuando el usuario interactúa manualmente (opcional)
