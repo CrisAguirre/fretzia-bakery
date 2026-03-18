@@ -26,7 +26,7 @@ interface Product {
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'FretziaBakery';
-  
+
   // Lista de imágenes con sus extensiones específicas
   images: string[] = [
     'assets/desk/2.jpg',
@@ -50,9 +50,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Datos de los cheesecakes para la galería
   cheesecakes: Product[] = [
-    { 
-      name: 'Cheescake New York', 
-      image: 'assets/2x4/1.png', 
+    {
+      name: 'Cheescake New York',
+      image: 'assets/2x4/1.png',
       description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
       options: [
         { label: 'Familiar 12 porciones', price: 60000 },
@@ -60,9 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
         { label: 'Mediana 8 porciones', price: 45000 }
       ]
     },
-    { 
-      name: 'Cheescake Limón', 
-      image: 'assets/2x4/2.png', 
+    {
+      name: 'Cheescake Limón',
+      image: 'assets/2x4/2.png',
       description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
       options: [
         { label: 'Familiar 12 porciones', price: 48000 },
@@ -72,22 +72,21 @@ export class AppComponent implements OnInit, OnDestroy {
     },
     { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
     { name: 'Cheescake Oreo', image: 'assets/2x4/4.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
-    { name: 'Cheescake Chocolate', image: 'assets/2x4/5.png', description: 'El favorito de los amantes del chocolate, con base oscura y cubierta de galleta de chocolate.' },
   ];
 
   pies: Product[] = [
-    { 
-      name: 'Pie de Cereza', 
-      image: 'assets/2x4/6.png', 
+    {
+      name: 'Pie de Cereza',
+      image: 'assets/2x4/6.png',
       description: 'Un clásico pie al estilo americano, con relleno de cerezas caramelizadas y una corteza crujiente.',
       options: [
         { label: 'Grande 8 porciones', price: 40000 },
         { label: 'Mediano 6 porciones', price: 30000 }
       ]
     },
-    { 
-      name: 'Pie de Manzana', 
-      image: 'assets/2x4/7.png', 
+    {
+      name: 'Pie de Manzana',
+      image: 'assets/2x4/7.png',
       description: 'Tradicional pie de manzanas caramelizadas al mejor estilo americano, con canela y corteza crujiente.',
       options: [
         { label: 'Grande 8 porciones', price: 36000 },
@@ -97,24 +96,24 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   cookies: Product[] = [
-    { 
-      name: 'Galletas Red Velvet', 
-      image: 'assets/2x4/8.png', 
+    {
+      name: 'Galletas Red Velvet',
+      image: 'assets/2x4/8.png',
       description: 'Suaves y deliciosas galletas Red Velvet con chispas de chocolate blanco y relleno suave de crema.',
       options: [
-        { label: '4 Unidades', price: 35000 },
-        { label: '6 Unidades', price: 50000 },
-        { label: '8 Unidades', price: 65000 }
+        { label: '4 Unidades', price: 28000 },
+        { label: '6 Unidades', price: 42000 },
+        { label: '8 Unidades', price: 56000 }
       ]
     }
   ];
 
   // Carrito y Modales
   cart: { product: Product, option: ProductOption, quantity: number }[] = [];
-  
+
   showProductModal = false;
   showCartModal = false;
-  
+
   selectedProduct: Product | null = null;
   selectedOption: ProductOption | null = null;
 
@@ -126,7 +125,7 @@ export class AppComponent implements OnInit, OnDestroy {
   intervalId: any;
   isPaused = false;
   showScrollIndicator = true;
-  
+
   // Variables para touch
   touchStartX = 0;
   touchEndX = 0;
@@ -279,7 +278,7 @@ export class AppComponent implements OnInit, OnDestroy {
   addToCart(name: string) {
     // Buscar el producto en todas las categorías
     const product = [...this.cheesecakes, ...this.pies, ...this.cookies].find(p => p.name === name);
-    
+
     if (product) {
       if (product.options && product.options.length > 0) {
         // Si tiene opciones, abrir modal de selección
@@ -300,8 +299,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   confirmAddToOrder() {
     if (this.selectedProduct && this.selectedOption) {
-      const existingItem = this.cart.find(item => 
-        item.product.name === this.selectedProduct!.name && 
+      const existingItem = this.cart.find(item =>
+        item.product.name === this.selectedProduct!.name &&
         item.option.label === this.selectedOption!.label
       );
 
@@ -317,7 +316,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.closeModals();
       // Opcional: Abrir el carrito automáticamente o mostrar mensaje flotante
-      this.openCartModal(); 
+      this.openCartModal();
     } else {
       alert('Por favor selecciona un tamaño.');
     }
@@ -376,15 +375,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   get whatsappLink(): string {
     const baseUrl = 'https://wa.me/573128033742';
-    
+
     if (this.cart.length === 0) {
       return baseUrl;
     }
 
-    const items = this.cart.map(item => 
+    const items = this.cart.map(item =>
       `${item.quantity}x ${item.product.name} (${item.option.label}) - $${item.option.price * item.quantity}`
     );
-    
+
     const message = `Hola, quisiera realizar el siguiente pedido:\n${items.join('\n')}\n\nTotal: $${this.cartTotal}`;
     return `${baseUrl}?text=${encodeURIComponent(message)}`;
   }
