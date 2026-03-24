@@ -55,23 +55,41 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/1.png',
       description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
       options: [
-        { label: 'Familiar 12 porciones', price: 60000 },
-        { label: 'Grande 10 porciones', price: 52000 },
-        { label: 'Mediana 8 porciones', price: 45000 }
+        { label: 'Grande (torta completa)', price: 70000 },
+        { label: 'Mediana (torta completa)', price: 50000 },
+        { label: 'Porción individual', price: 7000 }
       ]
     },
     {
       name: 'Cheescake Limón',
       image: 'assets/2x4/2.png',
-      description: 'Deliciosa textura con suave sabor a Limon y crema de queso y leche.',
+      description: 'Deliciosa textura con suave sabor a Limón y crema de queso y leche.',
       options: [
-        { label: 'Familiar 12 porciones', price: 48000 },
-        { label: 'Grande 10 porciones', price: 42000 },
-        { label: 'Mediana 8 porciones', price: 35000 }
+        { label: 'Grande (torta completa)', price: 48000 },
+        { label: 'Mediana (torta completa)', price: 36000 },
+        { label: 'Porción individual', price: 5500 }
       ]
     },
-    { name: 'Cheescake Arequipe', image: 'assets/2x4/3.png', description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.' },
-    { name: 'Cheescake Oreo', image: 'assets/2x4/4.png', description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.' },
+    {
+      name: 'Cheescake Arequipe',
+      image: 'assets/2x4/3.png',
+      description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.',
+      options: [
+        { label: 'Grande (torta completa)', price: 60000 },
+        { label: 'Mediana (torta completa)', price: 48000 },
+        { label: 'Porción individual', price: 6500 }
+      ]
+    },
+    {
+      name: 'Cheescake Oreo',
+      image: 'assets/2x4/4.png',
+      description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.',
+      options: [
+        { label: 'Grande (torta completa)', price: 70000 },
+        { label: 'Mediana (torta completa)', price: 50000 },
+        { label: 'Porción individual', price: 7000 }
+      ]
+    },
   ];
 
   pies: Product[] = [
@@ -121,7 +139,7 @@ export class AppComponent implements OnInit, OnDestroy {
   currentIndex3 = 0;
   prevIndex3 = 0;
   slideState: 'idle' | 'transitioning' = 'idle';
-  private slideTransitionDuration = 900; // ms — debe coincidir con la animación CSS
+  private slideTransitionDuration = 1400; // ms — debe coincidir con la animación CSS
   intervalId: any;
   isPaused = false;
   showScrollIndicator = true;
@@ -175,6 +193,8 @@ export class AppComponent implements OnInit, OnDestroy {
           'assets/slide-head/4.png',
           'assets/slide-head/5.png',
           'assets/slide-head/6.png',
+          'assets/slide-head/7.png',
+          'assets/slide-head/8.png',
         ];
       }
     }
