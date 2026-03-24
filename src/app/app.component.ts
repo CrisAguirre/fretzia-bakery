@@ -55,8 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/1.png',
       description: 'Exquisita combinación de cheescake con decorado glaseado de frutos rojos y arándanos.',
       options: [
-        { label: 'Grande (torta completa)', price: 70000 },
-        { label: 'Mediana (torta completa)', price: 50000 },
+        { label: 'Grande (12 porciones)', price: 70000 },
+        { label: 'Mediana (8 porciones)', price: 50000 },
         { label: 'Porción individual', price: 7000 }
       ]
     },
@@ -65,8 +65,8 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/2.png',
       description: 'Deliciosa textura con suave sabor a Limón y crema de queso y leche.',
       options: [
-        { label: 'Grande (torta completa)', price: 48000 },
-        { label: 'Mediana (torta completa)', price: 36000 },
+        { label: 'Grande (12 porciones)', price: 48000 },
+        { label: 'Mediana (8 porciones)', price: 36000 },
         { label: 'Porción individual', price: 5500 }
       ]
     },
@@ -75,8 +75,8 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/3.png',
       description: 'Una exquisitez en cada bocado, con una base de galleta, crema de arequipe, y cubierta de almendras frescas.',
       options: [
-        { label: 'Grande (torta completa)', price: 60000 },
-        { label: 'Mediana (torta completa)', price: 48000 },
+        { label: 'Grande (12 porciones)', price: 60000 },
+        { label: 'Mediana (8 porciones)', price: 48000 },
         { label: 'Porción individual', price: 6500 }
       ]
     },
@@ -85,8 +85,8 @@ export class AppComponent implements OnInit, OnDestroy {
       image: 'assets/2x4/4.png',
       description: 'Sabor intenso a Oreo tanto en su decorado como en su textura cremosa e irresistible.',
       options: [
-        { label: 'Grande (torta completa)', price: 70000 },
-        { label: 'Mediana (torta completa)', price: 50000 },
+        { label: 'Grande (12 porciones)', price: 70000 },
+        { label: 'Mediana (8 porciones)', price: 50000 },
         { label: 'Porción individual', price: 7000 }
       ]
     },
