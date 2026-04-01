@@ -3,905 +3,14 @@
   @font-face {
     font-family: 'Cheescake Sans';
     src: url('assets/fonts/piemonte/Piemonte.ttf') format('truetype');
-
-
-  }
-
-  header {
-    background-color: black;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 30px;
-    box-sizing: border-box;
-  }
-
-  footer {
-    background-color: black;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 20px;
-    color: white;
-    box-sizing: border-box;
-    font-family: 'Cheescake Sans';
-  }
-
-  .header-logo {
-    height: 150px;
-    width: auto;
-  }
-
-  /* Estilos adicionales del Footer */
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    gap: 40px;
-    margin-bottom: 30px;
-  }
-
-  .footer-column {
-    flex: 1;
-    min-width: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-column h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-
-  .footer-column p {
-    font-size: 1.2rem;
-    margin: 8px 0;
-    color: #ccc;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .footer-links a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 1.3rem;
-    transition: color 0.3s;
-  }
-
-  .footer-links a:hover {
-    color: white;
-  }
-
-  .social-icons {
-    display: flex;
-    gap: 20px;
-    margin-top: 15px;
-  }
-
-  .social-icon-link svg {
-    width: 28px;
-    height: 28px;
-    fill: white;
-    transition: transform 0.3s;
-  }
-
-  .social-icon-link:hover svg {
-    transform: scale(1.2);
-  }
-
-  .copyright {
-    border-top: 1px solid #333;
-    padding-top: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-    color: #888;
-  }
-
-  .footer-logo {
-    height: 120px;
-    width: auto;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 15px;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Cheescake Sans', sans-serif;
-  }
-
-  @media (max-width: 768px) {
-
-    header,
-    footer {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    /* Estilos del Slider para Móvil (Touch) */
-    .slider-container {
-      overflow-x: auto;
-      /* Habilitar scroll horizontal */
-      scroll-snap-type: x mandatory;
-      /* Efecto de imán al soltar */
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      /* Ocultar barra de scroll en Firefox */
-    }
-
-    .slider-container::-webkit-scrollbar {
-      display: none;
-      /* Ocultar barra de scroll en Chrome/Safari */
-    }
-
-    .slider-track {
-      animation: none;
-      /* Desactivar animación automática para permitir control manual */
-    }
-
-    .slider-image {
-      scroll-snap-align: start;
-      /* Alinear cada imagen al inicio del contenedor */
-    }
-
-    .slider-dots {
-      display: none;
-      /* Ocultar dots ya que no se sincronizan con el scroll manual */
-    }
-  }
-
-  /* Estilos del Slider */
-  .slider-container {
-    width: 100%;
-    height: calc(100vh - 110px);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .slider-track {
-    display: flex;
-    width: 1400%;
-    height: 100%;
-    transition: margin-left 0.5s ease-in-out;
-  }
-
-  .slider-image {
-    width: 7.142%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .head-slider .slider-image {
-    object-fit: contain;
-    background-color: black;
-  }
-
-  /* ── PARALLAX HEAD SLIDER ───────────────────────── */
-  .parallax-slider {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 110px);
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  @media (max-width: 768px) {
-    .parallax-slider {
-      height: 100vw;
-      min-height: 320px;
-      max-height: 500px;
-    }
-  }
-
-  /* Cada slide es una capa absoluta */
-  .parallax-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    will-change: transform, opacity;
-  }
-
-  /* La imagen centrada — sin escala base, desktop la maneja vía animación */
-  .parallax-slide img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    transform: scale(1);
-    transform-origin: center center;
-  }
-
-  /* Móvil: las imágenes de slide-head son portrait, no recortar */
-  @media (max-width: 768px) {
-    .parallax-slide img {
-      object-fit: contain;
-      object-position: center center;
-      background-color: black;
-    }
-  }
-
-  /* Overlay gradiente elegante — desde abajo y leve desde arriba */
-  .parallax-slide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.10) 40%, transparent 70%),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, transparent 30%);
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  /* Slide activo */
-  .parallax-slide.active {
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 1;
-  }
-
-  /* Slide que ENTRA */
-  .parallax-slide.enter {
-    z-index: 2;
-    opacity: 0;
-    animation: ps-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Slide que SALE */
-  .parallax-slide.leave {
-    z-index: 1;
-    opacity: 1;
-    animation: ps-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Fade base — usado en ambos breakpoints */
-  @keyframes ps-enter {
-    from {
-      opacity: 0;
-      filter: blur(6px);
-    }
-
-    60% {
-      filter: blur(1px);
-    }
-
-    to {
-      opacity: 1;
-      filter: blur(0px);
-    }
-  }
-
-  @keyframes ps-leave {
-    from {
-      opacity: 1;
-      filter: blur(0px);
-    }
-
-    to {
-      opacity: 0;
-      filter: blur(3px);
-    }
-  }
-
-  /* ── DESKTOP: parallax zoom centrico ── */
-  @media (min-width: 769px) {
-    .parallax-slide.enter img {
-      animation: ps-img-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .parallax-slide.leave img {
-      animation: ps-img-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .parallax-slide.active img {
-      animation: ps-kenburns 8s ease-in-out forwards;
-    }
-
-    @keyframes ps-img-enter {
-      from {
-        transform: scale(1.06);
-        transform-origin: center center;
-      }
-
-      to {
-        transform: scale(1.02);
-        transform-origin: center center;
-      }
-    }
-
-    @keyframes ps-img-leave {
-      from {
-        transform: scale(1.02);
-        transform-origin: center center;
-      }
-
-      to {
-        transform: scale(1.00);
-        transform-origin: center center;
-      }
-    }
-
-    @keyframes ps-kenburns {
-      from {
-        transform: scale(1.02);
-        transform-origin: center center;
-      }
-
-      to {
-        transform: scale(1.06);
-        transform-origin: center center;
-      }
-    }
-  }
-
-
-
-  /* Dots tipo línea */
-  .parallax-slider .slider-dots {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-    align-items: center;
-  }
-
-  /* Móvil: bajar un poco los dots */
-  @media (max-width: 768px) {
-    .parallax-slider .slider-dots {
-      bottom: 30px;
-    }
-  }
-
-  .parallax-slider .dot {
-    width: 7px;
-    height: 7px;
-    background-color: rgba(255, 255, 255, 0.35);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.4s ease, transform 0.4s ease;
-  }
-
-  .parallax-slider .dot.active {
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: scale(1.4);
-    width: 7px;
-  }
-
-  /* Scroll indicator — centrada debajo de los dots, visible en todas las vistas */
-  .parallax-slider .scroll-indicator {
-    display: block;
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-  }
-
-  .parallax-slider .scroll-indicator svg {
-    fill: rgba(255, 255, 255, 0.55);
-    width: 24px;
-    height: 24px;
-    animation: bounce-soft 2.2s ease-in-out infinite;
-  }
-
-  @keyframes bounce-soft {
-
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.5;
-    }
-
-    50% {
-      transform: translateY(6px);
-      opacity: 1;
-    }
-  }
-
-  /* Play/Pause indicator */
-  .parallax-slider .state-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 50%;
-    padding: 16px;
-    display: flex;
-    animation: state-fade 0.5s ease forwards;
-  }
-
-  .parallax-slider .state-indicator svg {
-    fill: white;
-    width: 32px;
-    height: 32px;
-  }
-
-  @keyframes state-fade {
-    from {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-
-    to {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.85);
-    }
-  }
-
-  /* ── MOBILE: Ken Burns centrico suave, sin recorte ── */
-  @media (max-width: 768px) {
-    .parallax-slide img {
-      object-fit: contain;
-      object-position: center center;
-      background-color: black;
-      transform: scale(1);
-      transform-origin: center center;
-    }
-
-    /* Entrada: emerge desde el centro, zoom muy sutil */
-    .parallax-slide.enter img {
-      animation: ps-mob-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-    }
-
-    /* Salida: se reduce levemente al centro */
-    .parallax-slide.leave img {
-      animation: ps-mob-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-    }
-
-    /* Ken Burns en reposo: zoom suavísimo desde el centro */
-    .parallax-slide.active img {
-      animation: ps-mob-kenburns 9s ease-in-out forwards !important;
-    }
-
-    @keyframes ps-mob-enter {
-      from {
-        transform: scale(1.02);
-        transform-origin: center center;
-        opacity: 0.2;
-      }
-
-      to {
-        transform: scale(1.00);
-        transform-origin: center center;
-        opacity: 1;
-      }
-    }
-
-    @keyframes ps-mob-leave {
-      from {
-        transform: scale(1.00);
-        transform-origin: center center;
-        opacity: 1;
-      }
-
-      to {
-        transform: scale(0.99);
-        transform-origin: center center;
-        opacity: 0;
-      }
-    }
-
-    @keyframes ps-mob-kenburns {
-      from {
-        transform: scale(1.00);
-        transform-origin: center center;
-      }
-
-      to {
-        transform: scale(1.02);
-        transform-origin: center center;
-      }
-    }
-
-    .parallax-slide.enter {
-      animation: ps-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .parallax-slide.leave {
-      animation: ps-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-  }
-
-  /* Estilos de los Dots (Indicadores de posición) */
-  .slider-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
-    align-items: center;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .dot.active {
-    background-color: white;
-    transform: scale(1.4);
-  }
-
-  /* Botón flotante de WhatsApp */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    background-color: white;
-    color: #25d366;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
-    text-decoration: none;
-    transition: transform 0.3s;
-  }
-
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-  }
-
-  .whatsapp-icon {
-    width: 30px;
-    height: 30px;
-    fill: #25d366;
-  }
-
-  /* Estilos de la Galería */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .gallery-item {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  .gallery-item:hover img {
-    transform: scale(1.05);
-  }
-
-  .gallery-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Fondo oscuro semitransparente */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    /* Oculto por defecto */
-    transition: opacity 0.3s ease;
-    font-family: 'Cheescake Sans', sans-serif;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    pointer-events: none;
-  }
-
-  .gallery-item:hover .gallery-overlay {
-    opacity: 1;
-    /* Visible al pasar el mouse */
-    pointer-events: auto;
-  }
-
-  .gallery-overlay h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5rem;
-  }
-
-  .description {
-    font-size: 1.5rem;
-    font-family: 'Cheescake Sans';
-    margin-bottom: 15px;
-    line-height: 1.2;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .add-btn {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    /*font-weight: bold;*/
-    font-family: 'Cheescake Sans';
-    transition: background-color 0.3s;
-  }
-
-  .add-btn:hover {
-    background-color: #333;
-  }
-
-  .slider-small {
-    height: calc((100vh - 110px) * 0.75);
-  }
-
-  @media (max-width: 768px) {
-    .slider-small {
-      height: calc((100vh - 110px) * 0.65);
-    }
-  }
-
-  /* Estilos del carrusel de texto (ticker) */
-  .ticker-wrap {
-    width: 100%;
-    overflow: hidden;
-    background-color: black;
-    padding: 15px 0;
-    box-sizing: border-box;
-    white-space: nowrap;
-  }
-
-  .ticker-content {
-    display: inline-block;
-    padding-left: 100%;
-    animation: ticker-scroll 43s linear infinite;
-  }
-
-  .ticker-content span {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: white;
-    padding: 0 2rem;
-  }
-
-  @keyframes ticker-scroll {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  /* Estilos del Modal de Pedido */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-    font-family: sans-serif;
-  }
-
-  .modal-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    background: none;
-    border: none;
-  }
-
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-    font-size: 0.9rem;
   }
 
-  .confirm-btn {
-    display: block;
-    background-color: #25d366;
-    color: white;
-    text-align: center;
-    padding: 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    /*font-weight: bold;*/
-    font-size: 0.9rem;
-    transition: background-color 0.3s;
+  /* Win2K blink for welcome banner */
+  @keyframes win-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
-  .confirm-btn:hover {
-    background-color: #128c7e;
-  }
-
-  .delete-btn {
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: 10px;
-    cursor: pointer;
-    /*font-weight: bold;*/
-    line-height: 1;
-  }
-
-  .delete-btn:hover {
-    background-color: #cc0000;
-  }
-
-  /* Botón flotante del Carrito */
-  .cart-float {
-    position: fixed;
-    bottom: 100px;
-    left: 20px;
-    background-color: white;
-    color: black;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-
-  .cart-float:hover {
-    transform: scale(1.1);
-  }
-
-  .cart-icon {
-    width: 30px;
-    height: 30px;
-    fill: black;
-  }
-
-  /* Estilos para opciones de producto */
-  .option-btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    background: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-  }
-
-  .option-btn.selected {
-    background-color: black;
-    color: white;
-    border-color: black;
-  }
-
-  .cart-total {
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-align: right;
-    margin-top: 15px;
-    border-top: 2px solid #eee;
-    padding-top: 10px;
-    font-family: 'Cheescake Sans', sans-serif;
-  }
-
-  /* Scroll Indicator genérico — oculto (el del parallax-slider tiene su propia regla) */
-  .scroll-indicator {
-    display: none;
-    pointer-events: none;
-  }
-
-  /* Play/Pause Animation Overlay */
-  .state-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeOut 0.5s ease-out forwards;
-  }
-
-  .state-indicator svg {
-    width: 40px;
-    height: 40px;
-    fill: rgba(255, 255, 255, 0.8);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  }
-
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(1.5);
-    }
-  }
 </style>
 <!-- Menu Head -->
 <header>
@@ -909,10 +18,10 @@
     <img src="assets/logos/logofive.png" alt="Fretzia Bakery Logo" class="header-logo">
   </a>
   <nav>
-    <a style="font-size: 1.5rem; " href="#cheescakes">Cheescakes</a>
-    <a style="font-size: 1.5rem; " href="#pies">Pies</a>
-    <a style="font-size: 1.5rem; " href="#cookies">Cookies</a>
-    <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openCartModal()">Mi Pedido</a>
+    <a href="#cheescakes">Cheescakes</a>
+    <a href="#pies">Pies</a>
+    <a href="#cookies">Cookies</a>
+    <a href="javascript:void(0)" (click)="openCartModal()">Mi Pedido</a>
   </nav>
 </header>
 <!-- Parallax Head Slider -->
@@ -952,7 +61,7 @@
   </div>
 </div>
 <!-- Caroussel -->
-<div class="ticker-wrap" style="font-family: 'Cheescake Sans'; font-size: '5rem'">
+<div class="ticker-wrap" style="font-family: 'Comic Sans MS', cursive;">
   <div class="ticker-content">
     <span style="">
       Todos nuestros productos se venden sobre pedido para garantizar su frescura
@@ -1017,11 +126,9 @@
   </div>
 </div>
 <!-- Cheescakes -->
-<section id="cheescakes" style="padding: 60px 20px;">
-  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cheescakes</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;"> Prueba la auténtica
-    receta clásica sabor a crema de leche y queso, conoce nuestras distintas presentaciones y comparte esas fechas
-    especiales con el mejor sabor.</p>
+<section id="cheescakes" data-title="📁 C:\FretziaBakery\Cheescakes — Explora nuestros sabores">
+  <h2>Cheescakes</h2>
+  <p>Prueba la auténtica receta clásica sabor a crema de leche y queso, conoce nuestras distintas presentaciones y comparte esas fechas especiales con el mejor sabor.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let cake of cheesecakes">
       <img [src]="cake.image" [alt]="cake.name">
@@ -1034,10 +141,9 @@
   </div>
 </section>
 <!-- Pies o Tartas -->
-<section id="pies" style="padding: 60px 20px; background-color: #f9f9f9;">
-  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Pies</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Tartas con relleno de
-    cereza o manzana, de corte clásico americano, proximamente sabor a chilacuán.</p>
+<section id="pies" data-title="📁 C:\FretziaBakery\Pies — Tartas americanas">
+  <h2>Pies</h2>
+  <p>Tartas con relleno de cereza o manzana, de corte clásico americano, proximamente sabor a chilacuán.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let pie of pies">
       <img [src]="pie.image" [alt]="pie.name">
@@ -1051,10 +157,9 @@
 </section>
 
 <!-- Cookies o Galletas -->
-<section id="cookies" style="padding: 60px 20px;">
-  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Cookies</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem;">Galletas recién
-    horneadas, crujientes por fuera, suaves por dentro.</p>
+<section id="cookies" data-title="📁 C:\FretziaBakery\Cookies — Galletas artesanales">
+  <h2>Cookies</h2>
+  <p>Galletas recién horneadas, crujientes por fuera, suaves por dentro.</p>
   <div class="gallery-grid">
     <div class="gallery-item" *ngFor="let cookie of cookies">
       <img [src]="cookie.image" [alt]="cookie.name">
@@ -1068,13 +173,11 @@
 </section>
 
 <!-- Nosotros -->
-<section id="nosotros" style="padding: 60px 20px 0 20px; background-color: #f9f9f9;">
-  <h2 style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 2.5rem;">Nosotros</h2>
-  <p style="text-align: center; font-family: 'Cheescake Sans', sans-serif; font-size: 1.5rem; ">Somos una pastelería
-    gourmet, buscamos la perfección en cada receta para obtener sabores y texturas únicos, nuestra especialidad es el
-    cheesecake artesanal.</p>
-  <div style="text-align: center; margin: 20px 0;">
-    <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 100px; height: auto;">
+<section id="nosotros" data-title="📁 C:\FretziaBakery\Nosotros — Quiénes somos">
+  <h2>Nosotros</h2>
+  <p>Somos una pastelería gourmet, buscamos la perfección en cada receta para obtener sabores y texturas únicos, nuestra especialidad es el cheesecake artesanal.</p>
+  <div style="text-align: center; margin: 12px 0 4px;">
+    <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 80px; height: auto; image-rendering: pixelated;">
   </div>
   <div class="slider-container slider-small"
     style="margin-top: 40px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);"
@@ -1101,7 +204,7 @@
   </div>
 </section>
 <!-- Caroussel -->
-<div class="ticker-wrap" style="font-family: 'Cheescake Sans'; font-size: '5rem'">
+<div class="ticker-wrap" style="font-family: 'Comic Sans MS', cursive;">
   <div class="ticker-content">
     <span style="">
       Todos nuestros productos se venden sobre pedido para garantizar su frescura
@@ -1163,6 +266,21 @@
         <path
           d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
       </svg></span>
+  </div>
+</div>
+<!-- Win2K Welcome Banner -->
+<div style="margin: 12px 16px; background: #d4d0c8; border-top: 3px solid #ffffff; border-left: 3px solid #ffffff; border-right: 3px solid #808080; border-bottom: 3px solid #808080; outline: 1px solid #000;">
+  <div style="background: linear-gradient(90deg, #000080, #1084d0 60%, #000080); color: #fff; font-family: 'Tahoma', sans-serif; font-size: 12px; font-weight: bold; padding: 4px 8px;">
+    💡 Consejo del Sistema — Fretzia Bakery
+    <span style="float:right; cursor:pointer; background:#d4d0c8; color:#000; border-top:2px solid #fff; border-left:2px solid #fff; border-right:2px solid #808080; border-bottom:2px solid #808080; font-size:10px; padding:0 4px; font-family: 'Tahoma',sans-serif;">✕</span>
+  </div>
+  <div style="padding: 14px 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+    <img src="assets/logos/logo2.png" alt="Logo" style="height: 52px; width: auto; image-rendering: pixelated;">
+    <div>
+      <p style="margin: 0 0 6px; font-family: 'Comic Sans MS', cursive; font-size: 1rem; color: #000080; font-weight: bold;">¡Bienvenido a Fretzia Bakery!</p>
+      <p style="margin: 0; font-family: 'Tahoma', sans-serif; font-size: 12px; color: #000;">Todos nuestros productos se elaboran <span style="color: #cc0000; font-weight: bold;">sobre pedido</span> para garantizar su frescura. Domicilio gratis en Pasto. &nbsp;<span style="animation: win-blink 1s step-end infinite; display: inline-block;">✨</span></p>
+    </div>
+    <a href="https://wa.me/573128033742" target="_blank" style="margin-left: auto; background: #d4d0c8; color: #000; font-family: 'Tahoma', sans-serif; font-size: 12px; font-weight: bold; text-decoration: none; padding: 4px 14px; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #808080; border-bottom: 2px solid #808080;">Hacer Pedido</a>
   </div>
 </div>
 <router-outlet></router-outlet>
