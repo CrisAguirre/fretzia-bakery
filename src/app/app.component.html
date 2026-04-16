@@ -203,15 +203,47 @@
     position: relative;
     width: 100%;
     height: calc(100vh - 110px);
+  }
+
+  /* ── SIMPLE VIDEO SLIDER ────────────────────────── */
+  .video-slider {
+    position: relative;
+    width: 100%;
     overflow: hidden;
     cursor: pointer;
   }
+
+  .video-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .video-slide.active {
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  /* Reducción del 20% solicitada para el slider principal */
+  .head-slider-container {
+    height: calc((100vh - 110px) * 0.8) !important;
+  }
+
 
   @media (max-width: 768px) {
     .parallax-slider {
       height: 100vw;
       min-height: 320px;
       max-height: 500px;
+    }
+
+    .head-slider-container {
+      height: 60vw !important;
+      min-height: 250px !important;
+      max-height: 400px !important;
     }
   }
 
@@ -225,7 +257,7 @@
   }
 
   /* La imagen centrada — sin escala base, desktop la maneja vía animación */
-  .parallax-slide img {
+  .parallax-slide img, .parallax-slide video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -238,7 +270,7 @@
 
   /* Móvil: las imágenes de slide-head son portrait, no recortar */
   @media (max-width: 768px) {
-    .parallax-slide img {
+    .parallax-slide img, .parallax-slide video {
       object-fit: contain;
       object-position: center center;
       background-color: black;
@@ -309,15 +341,15 @@
 
   /* ── DESKTOP: parallax zoom centrico ── */
   @media (min-width: 769px) {
-    .parallax-slide.enter img {
+    .parallax-slide.enter img, .parallax-slide.enter video {
       animation: ps-img-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    .parallax-slide.leave img {
+    .parallax-slide.leave img, .parallax-slide.leave video {
       animation: ps-img-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    .parallax-slide.active img {
+    .parallax-slide.active img, .parallax-slide.active video {
       animation: ps-kenburns 8s ease-in-out forwards;
     }
 
@@ -459,7 +491,7 @@
 
   /* ── MOBILE: Ken Burns centrico suave, sin recorte ── */
   @media (max-width: 768px) {
-    .parallax-slide img {
+    .parallax-slide img, .parallax-slide video {
       object-fit: contain;
       object-position: center center;
       background-color: black;
@@ -468,17 +500,17 @@
     }
 
     /* Entrada: emerge desde el centro, zoom muy sutil */
-    .parallax-slide.enter img {
+    .parallax-slide.enter img, .parallax-slide.enter video {
       animation: ps-mob-enter 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
     }
 
     /* Salida: se reduce levemente al centro */
-    .parallax-slide.leave img {
+    .parallax-slide.leave img, .parallax-slide.leave video {
       animation: ps-mob-leave 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
     }
 
     /* Ken Burns en reposo: zoom suavísimo desde el centro */
-    .parallax-slide.active img {
+    .parallax-slide.active img, .parallax-slide.active video {
       animation: ps-mob-kenburns 9s ease-in-out forwards !important;
     }
 
@@ -915,21 +947,22 @@
     <a style="font-size: 1.5rem; " href="javascript:void(0)" (click)="openCartModal()">Mi Pedido</a>
   </nav>
 </header>
-<!-- Parallax Head Slider -->
-<div class="parallax-slider" (click)="togglePauseWithAnimation()" (touchstart)="onTouchStart($event)"
+<!-- Simple Video Head Slider Sin Efectos -->
+<div class="video-slider head-slider-container" (click)="togglePauseWithAnimation()" (touchstart)="onTouchStart($event)"
   (touchend)="onTouchEnd($event, 'main')">
 
-  <!-- Una capa por imagen -->
-  <div *ngFor="let img of images3; let i = index" class="parallax-slide"
-    [class.active]="i === currentIndex3 && slideState !== 'transitioning'"
-    [class.enter]="i === currentIndex3 && slideState === 'transitioning'"
-    [class.leave]="i === prevIndex3 && slideState === 'transitioning'">
-    <img [src]="img" alt="Fretzia Bakery" loading="lazy">
+  <!-- Una capa por video visible solo la activa -->
+  <div *ngFor="let vid of videos; let i = index" class="video-slide"
+    [class.active]="i === currentIndex3"
+    [style.opacity]="i === currentIndex3 ? '1' : '0'">
+    <video #videoPlayer autoplay muted loop playsinline [muted]="true" style="object-fit: contain; width: 100%; height: 100%; position: absolute; inset: 0; background-color: black;">
+      <source [src]="vid" type="video/mp4">
+    </video>
   </div>
 
   <!-- Dots tipo línea -->
   <div class="slider-dots">
-    <span *ngFor="let img of images3; let i = index" class="dot" [class.active]="i === currentIndex3"
+    <span *ngFor="let vid of videos; let i = index" class="dot" [class.active]="i === currentIndex3"
       (click)="$event.stopPropagation(); onDotClick3(i)">
     </span>
   </div>
@@ -1076,13 +1109,16 @@
   <div style="text-align: center; margin: 20px 0;">
     <img src="assets/logos/logo2.png" alt="Logo Nosotros" style="max-width: 100px; height: auto;">
   </div>
-  <div class="slider-container slider-small"
+  <div class="parallax-slider slider-small"
     style="margin-top: 40px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px);"
     (click)="togglePauseWithAnimation()" (touchstart)="onTouchStart($event)"
     (touchend)="onTouchEnd($event, 'secondary')">
-    <!-- El margen izquierdo se calcula dinámicamente: -100% * índice actual -->
-    <div class="slider-track" [style.marginLeft.%]="-(currentIndex * 100)">
-      <img *ngFor="let img of images" [src]="img" class="slider-image" alt="Slider Image">
+    
+    <div *ngFor="let img of images; let i = index" class="parallax-slide"
+      [class.active]="i === currentIndex && slideStateFooter !== 'transitioning'"
+      [class.enter]="i === currentIndex && slideStateFooter === 'transitioning'"
+      [class.leave]="i === prevIndex && slideStateFooter === 'transitioning'">
+      <img [src]="img" alt="Fretzia Bakery" loading="lazy">
     </div>
 
     <div class="slider-dots">
@@ -1090,6 +1126,7 @@
         (click)="$event.stopPropagation(); onDotClick(i)">
       </span>
     </div>
+
     <div class="state-indicator" *ngIf="animationState">
       <svg *ngIf="animationState === 'play'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M8 5v14l11-7z" />

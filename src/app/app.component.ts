@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChildren, QueryList, ElementRef, AfterViewInit } from '@angular/core';
 
 interface ProductOption {
   label: string;
@@ -24,29 +24,24 @@ interface Product {
     }
   `]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   title = 'FretziaBakery';
 
-  // Lista de imágenes con sus extensiones específicas
-  images: string[] = [
-    'assets/desk/2.jpg',
-    'assets/desk/3.jpg',
-    'assets/desk/4.jpg',
-    'assets/desk/5.jpg',
-    'assets/desk/6.jpg',
-    'assets/desk/7.jpg',
-    'assets/desk/8.jpg',
-    'assets/desk/10.jpg',
-    'assets/desk/13.jpg',
+  @ViewChildren('videoPlayer') videoPlayers!: QueryList<ElementRef<HTMLVideoElement>>;
+
+  // Lista de videos para el head slider
+  videos: string[] = [
+    'assets/video/1.mp4',
+    'assets/video/2.mp4',
+    'assets/video/3.mp4',
+    'assets/video/4.mp4',
+    'assets/video/5.mp4',
+    'assets/video/6.mp4',
+    'assets/video/7.mp4',
   ];
-  images3: string[] = [
-    'assets/slide-head/1.png',
-    'assets/slide-head/2.png',
-    'assets/slide-head/3.png',
-    'assets/slide-head/4.png',
-    'assets/slide-head/5.png',
-    'assets/slide-head/6.png',
-  ];
+
+  // Imágenes para el footer slider
+  images: string[] = [];
 
   // Datos de los cheesecakes para la galería
   cheesecakes: Product[] = [
@@ -136,6 +131,9 @@ export class AppComponent implements OnInit, OnDestroy {
   selectedOption: ProductOption | null = null;
 
   currentIndex = 0;
+  prevIndex = 0;
+  slideStateFooter: 'idle' | 'transitioning' = 'idle';
+
   currentIndex3 = 0;
   prevIndex3 = 0;
   slideState: 'idle' | 'transitioning' = 'idle';
@@ -157,6 +155,33 @@ export class AppComponent implements OnInit, OnDestroy {
     this.updateResponsiveImage();
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.playCurrentVideo();
+    }, 100);
+  }
+
+  playCurrentVideo() {
+    if (!this.videoPlayers) return;
+    const vids = this.videoPlayers.toArray();
+    vids.forEach((v, index) => {
+      if (index === this.currentIndex3) {
+        v.nativeElement.currentTime = 0;
+        v.nativeElement.play().catch(e => console.error('Auto-play failed', e));
+      } else {
+        v.nativeElement.pause();
+      }
+    });
+  }
+
+  pauseCurrentVideo() {
+    if (!this.videoPlayers) return;
+    const vids = this.videoPlayers.toArray();
+    if (vids[this.currentIndex3]) {
+      vids[this.currentIndex3].nativeElement.pause();
+    }
+  }
+
   ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
@@ -166,7 +191,7 @@ export class AppComponent implements OnInit, OnDestroy {
   startAutoSlide() {
     this.intervalId = setInterval(() => {
       this.nextSlide();
-    }, 4000);
+    }, 8000);
   }
 
   @HostListener('window:resize', [])
@@ -177,7 +202,7 @@ export class AppComponent implements OnInit, OnDestroy {
   updateResponsiveImage() {
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 768) {
-        this.images3 = [
+        this.images = [
           'assets/4k/0.png',
           'assets/4k/1.png',
           'assets/4k/2.png',
@@ -186,7 +211,7 @@ export class AppComponent implements OnInit, OnDestroy {
           'assets/4k/5.png',
         ];
       } else {
-        this.images3 = [
+        this.images = [
           'assets/slide-head/1.png',
           'assets/slide-head/2.png',
           'assets/slide-head/3.png',
@@ -211,16 +236,23 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    this.goToSlide3((this.currentIndex3 + 1) % this.images3.length);
+    this.goToSlide((this.currentIndex + 1) % this.images.length);
+    this.goToSlide3((this.currentIndex3 + 1) % this.videos.length);
   }
 
   prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.goToSlide((this.currentIndex - 1 + this.images.length) % this.images.length);
+    this.goToSlide3((this.currentIndex3 - 1 + this.videos.length) % this.videos.length);
   }
 
   goToSlide(index: number) {
+    if (this.slideStateFooter === 'transitioning' || index === this.currentIndex) return;
+    this.prevIndex = this.currentIndex;
     this.currentIndex = index;
+    this.slideStateFooter = 'transitioning';
+    setTimeout(() => {
+      this.slideStateFooter = 'idle';
+    }, this.slideTransitionDuration);
   }
 
   goToSlide3(index: number) {
@@ -228,6 +260,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.prevIndex3 = this.currentIndex3;
     this.currentIndex3 = index;
     this.slideState = 'transitioning';
+    setTimeout(() => {
+      this.playCurrentVideo();
+    });
     setTimeout(() => {
       this.slideState = 'idle';
     }, this.slideTransitionDuration);
@@ -249,8 +284,10 @@ export class AppComponent implements OnInit, OnDestroy {
       if (this.intervalId) {
         clearInterval(this.intervalId);
       }
+      this.pauseCurrentVideo();
     } else {
       this.startAutoSlide();
+      this.playCurrentVideo();
     }
   }
 
@@ -376,7 +413,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.touchEndX < this.touchStartX - threshold) {
       // Swipe Left (Siguiente)
       if (slider === 'main') {
-        this.currentIndex3 = (this.currentIndex3 + 1) % this.images3.length;
+        this.currentIndex3 = (this.currentIndex3 + 1) % this.videos.length;
       } else {
         this.currentIndex = (this.currentIndex + 1) % this.images.length;
       }
@@ -385,7 +422,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.touchEndX > this.touchStartX + threshold) {
       // Swipe Right (Anterior)
       if (slider === 'main') {
-        this.currentIndex3 = (this.currentIndex3 - 1 + this.images3.length) % this.images3.length;
+        this.currentIndex3 = (this.currentIndex3 - 1 + this.videos.length) % this.videos.length;
       } else {
         this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
       }
