@@ -955,7 +955,7 @@
   <div *ngFor="let vid of videos; let i = index" class="video-slide"
     [class.active]="i === currentIndex3"
     [style.opacity]="i === currentIndex3 ? '1' : '0'">
-    <video #videoPlayer autoplay muted loop playsinline [muted]="true" style="object-fit: contain; width: 100%; height: 100%; position: absolute; inset: 0; background-color: black;">
+    <video #videoPlayer [attr.preload]="i === currentIndex3 || i === (currentIndex3 + 1) % videos.length ? 'auto' : 'none'" muted loop playsinline [muted]="true" style="object-fit: contain; width: 100%; height: 100%; position: absolute; inset: 0; background-color: black;">
       <source [src]="vid" type="video/mp4">
     </video>
   </div>
